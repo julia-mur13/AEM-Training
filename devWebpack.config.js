@@ -1,0 +1,49 @@
+const paths = require('./paths');
+const INPUT_JS_FILES = paths.INPUT_JS_FILES;
+
+const gulp = require('gulp');
+const webpackStream = require('webpack-stream');
+const named = require('vinyl-named');
+
+module.exports = function (callback) {
+    let firstBuildReady = false;
+
+    function done(err) {
+        firstBuildReady = true;
+        if (err) {
+            return;
+        }
+    }
+
+    let options = {
+        context: __dirname + INPUT_JS_FILES,
+        entry: {
+            home: './home',
+            about: './about'
+        },
+        output: {
+            path: __dirname + '/public/js',
+            filename: '[name].js',
+            library: '[name]'
+        },
+        watch: true,
+        devtool: "cheap-module-inline-source-map",
+        module: {
+            rules: [{
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                use: ['babel-loader']
+            }]
+        },
+    };
+    return gulp.src(INPUT_JS_FILES + '/*.js')
+        .pipe(named())
+        .pipe(webpackStream(options, null, done))
+        .pipe(gulp.dest('public/js'))
+        .on('data', function () {
+            if (firstBuildReady) {
+                callback();
+            }
+        })
+};
+
