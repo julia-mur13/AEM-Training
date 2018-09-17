@@ -2,7 +2,6 @@ const paths = require('./paths');
 const INPUT_JS_FILES = paths.INPUT_JS_FILES;
 
 const gulp = require('gulp');
-const uglify = require('gulp-uglify');
 const gzip = require('gulp-gzip');
 const webpackStream = require('webpack-stream');
 const named = require('vinyl-named');
@@ -33,7 +32,6 @@ module.exports = function () {
     return gulp.src(INPUT_JS_FILES + '/*.js')
         .pipe(named())
         .pipe(webpackStream(options))
-        .pipe(uglify())
         .pipe(gulp.dest('public/js'))
         .pipe(gzip())
         .pipe(gulp.dest('public/js'))

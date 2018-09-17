@@ -37,6 +37,11 @@ function html() {
         .pipe(gulp.dest('public'));
 }
 
+function imgs() {
+    return gulp.src(INPUT_DIRS + '/*.png')
+        .pipe(gulp.dest('public'))
+}
+
 function serve() {
     browserSync.init({
         server: 'public'
@@ -48,12 +53,12 @@ function watch() {
     gulp.watch(INPUT_DIRS + '/*.*', gulp.series(html));
 }
 
-gulp.task('devBuild', gulp.series(clean, gulp.parallel(styles, devWebpackTask), html));
-gulp.task('prodBuild', gulp.series(clean, gulp.parallel(styles, prodWebpackTask), html));
+gulp.task('devBuild', gulp.series(clean, gulp.parallel(styles, devWebpackTask, imgs), html));
+gulp.task('prodBuild', gulp.series(clean, gulp.parallel(styles, prodWebpackTask, imgs), html));
 
 gulp.task('default',
     gulp.series('devBuild', gulp.parallel(watch, serve))
 );
 gulp.task('prod',
-    gulp.series('prodBuild', serve)
+    gulp.series('prodBuild')
 );
