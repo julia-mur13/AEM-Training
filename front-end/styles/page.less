@@ -3,9 +3,13 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: #f5f7f9;
 }
 
 header {
+  background: #071c2c;
+  color: #ffffff;
+  height: 50px;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -14,16 +18,22 @@ header {
 .header-container {
   display: flex;
   flex: 1 0 auto;
-  height: 30px;
   justify-content: space-between;
   .img-language {
     display: none;
   }
   .text-logo {
+    display: flex;
+    align-items: center;
     margin-left: 40px;
   }
   .lang-container {
-    margin-right: 30px;
+    margin-right: 50px;
+    display: flex;
+    align-items: center;
+  }
+  .text-en {
+    text-decoration: none;
   }
 }
 
@@ -38,19 +48,21 @@ main {
 }
 
 .post {
-  margin: 10px 40px 10px 40px;
+  background: #ad9469;
+  margin: 30px 40px 10px 40px;
   position: relative;
-  border: 1px solid blueviolet;
   width: 350px;
   height: 280px;
   word-wrap: break-word;
   .post-text {
     padding: 5px 15px 15px 15px;
+    color: #ffffff;
     font-size: 15px;
   }
   .post-title {
     padding: 15px 15px 5px 15px;
     font-size: 20px;
+    color: #ffffff;
   }
   .text-read-more {
     position: absolute;
@@ -61,18 +73,27 @@ main {
 
 footer {
   flex-shrink: 0;
+  background: #071c2c;
+  color: #ffffff;
+  height: 50px;
 }
 
 .footer-container {
-  height: 30px;
+  height: 50px;
   display: flex;
   justify-content: space-between;
   flex: 1 0 auto;
   .footer-space {
     width: 250px;
   }
+  .footer-text {
+    display: flex;
+    align-items: center;
+  }
   .footer-feedbook {
     width: 250px;
+    display: flex;
+    align-items: center;
   }
 }
 
