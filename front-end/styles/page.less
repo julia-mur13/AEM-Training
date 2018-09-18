@@ -1,18 +1,19 @@
 html,
 body {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #f5f7f9;
+  min-height: 100vh;
+  background: #f0f0f0;
 }
 
 header {
-  background: #071c2c;
-  color: #ffffff;
-  height: 50px;
   display: flex;
   justify-content: center;
+  height: 70px;
   width: 100%;
+  background: #000000;
+  color: #ffffff;
+
 }
 
 .header-container {
@@ -28,13 +29,17 @@ header {
     margin-left: 40px;
   }
   .lang-container {
-    margin-right: 50px;
     display: flex;
     align-items: center;
+    margin-right: 50px;
   }
   .text-en {
-    text-decoration: none;
+    color: #ffffff;
   }
+}
+
+a:hover {
+  color: #818181 !important;
 }
 
 main {
@@ -42,47 +47,60 @@ main {
 }
 
 .main-container {
-  height: 100%;
-  flex: 1 0 auto;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  flex: 1 0 auto;
+  .posts-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
 }
 
 .post {
-  background: #ad9469;
-  margin: 30px 40px 10px 40px;
   position: relative;
-  width: 350px;
-  height: 280px;
+  height: 380px;
+  width: 25%;
+  background: #ffffff;
+  margin: 30px 40px 10px 40px;
   word-wrap: break-word;
   .post-text {
     padding: 5px 15px 15px 15px;
-    color: #ffffff;
     font-size: 15px;
+    color: #000000;
   }
   .post-title {
     padding: 15px 15px 5px 15px;
     font-size: 20px;
-    color: #ffffff;
+    color: #000000;
   }
   .text-read-more {
     position: absolute;
     bottom: 0;
+    right: 0;
     padding: 15px 15px 15px 15px;
+    color: #000000;
   }
 }
 
 footer {
+  height: 70px;
+  width: 100%;
   flex-shrink: 0;
-  background: #071c2c;
+  background: #000000;
+  margin-top: 30px;
   color: #ffffff;
-  height: 50px;
+
 }
 
 .footer-container {
-  height: 50px;
   display: flex;
   justify-content: space-between;
   flex: 1 0 auto;
+  height: 70px;
   .footer-space {
     width: 250px;
   }
@@ -91,9 +109,12 @@ footer {
     align-items: center;
   }
   .footer-feedbook {
-    width: 250px;
     display: flex;
     align-items: center;
+    width: 250px;
+  }
+  .footer-text-feedbook {
+    color: #f0f0f0;
   }
 }
 
@@ -114,8 +135,8 @@ footer {
     }
     .img-language {
       display: inline;
-      width: 20px;
       height: 20px;
+      width: 20px;
       vertical-align: middle;
     }
     .text-lang {
@@ -124,18 +145,20 @@ footer {
   }
 
   .post {
-    width: 95%;
     height: 500px;
+    width: 95%;
   }
 
   .footer-container {
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     .footer-space {
       display: none;
     }
     .footer-feedbook {
-      text-align: center;
+      width: 114px;
+      margin-top: 10px;
     }
   }
 }
