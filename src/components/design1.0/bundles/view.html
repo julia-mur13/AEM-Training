@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Example</title>
-    <link rel="stylesheet" href="../all.css">
+    <link rel="stylesheet" href="../../../../all.css">
     <!--<script src="/js/home.js"></script>-->
 </head>
 <body>
@@ -11,7 +11,7 @@
     <div class="header-container">
         <div class="text-logo">Logo</div>
         <div class="lang-container">
-            <img class="img-language" src="./imgs/world.png"/>
+            <img class="img-language" src="../../../../public/imgs/world.png"/>
             <span class="text-lang">Lang:</span>
             <a href="" class="text-en">en</a>
         </div>
@@ -20,13 +20,7 @@
 <main>
     <div class="main-container">
         <div class="posts-row">
-            <article class="post">
-                <div class="post-title">Title1</div>
-                <div class="post-text">Text1mlkgnfggggggggggggggggggggggg
-                    ggggggggggggggggggggggggggggggg
-                </div>
-                <a class="text-read-more" href="">Read more</a>
-            </article>
+            <% include ../Post/Post.html %>
             <article class="post">
                 <div class="post-title">Title2</div>
                 <div class="post-text">Text2</div>

@@ -1,5 +1,5 @@
 const paths = require('./paths');
-const INPUT_JS_FILES = paths.INPUT_JS_FILES;
+const INPUT_BUNDLES = paths.INPUT_BUNDLES;
 
 const gulp = require('gulp');
 const gzip = require('gulp-gzip');
@@ -8,7 +8,7 @@ const named = require('vinyl-named');
 
 module.exports = function () {
     let options = {
-        context: __dirname + INPUT_JS_FILES,
+        context: __dirname + INPUT_BUNDLES,
         entry: {
             home: './home',
             about: './about'
@@ -22,14 +22,14 @@ module.exports = function () {
         devtool: false,
         module: {
             rules: [{
-                test: /\.(js|jsx)$/,
+                test: /\.js/,
                 exclude: /node_modules/,
                 use: ['babel-loader']
             }]
         },
 
     };
-    return gulp.src(INPUT_JS_FILES + '/*.js')
+    return gulp.src(INPUT_BUNDLES + '/*.js')
         .pipe(named())
         .pipe(webpackStream(options))
         .pipe(gulp.dest('public/js'))

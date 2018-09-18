@@ -1,5 +1,5 @@
 const paths = require('./paths');
-const INPUT_JS_FILES = paths.INPUT_JS_FILES;
+const INPUT_BUNDLES = paths.INPUT_BUNDLES;
 
 const gulp = require('gulp');
 const webpackStream = require('webpack-stream');
@@ -16,13 +16,13 @@ module.exports = function (callback) {
     }
 
     let options = {
-        context: __dirname + INPUT_JS_FILES,
+        context: __dirname + INPUT_BUNDLES,
         entry: {
-            home: './home',
-            about: './about'
+            home: './bundle1',
+            // about: './about'
         },
         output: {
-            path: __dirname + '/public/js',
+            path: __dirname + '/public',
             filename: '[name].js',
             library: '[name]'
         },
@@ -30,16 +30,16 @@ module.exports = function (callback) {
         devtool: "cheap-module-inline-source-map",
         module: {
             rules: [{
-                test: /\.(js|jsx)$/,
+                test: /\.js/,
                 exclude: /node_modules/,
                 use: ['babel-loader']
             }]
         },
     };
-    return gulp.src(INPUT_JS_FILES + '/*.js')
+    return gulp.src(INPUT_BUNDLES + '/*.js')
         .pipe(named())
         .pipe(webpackStream(options, null, done))
-        .pipe(gulp.dest('public/js'))
+        .pipe(gulp.dest('public'))
         .on('data', function () {
             if (firstBuildReady) {
                 callback();
