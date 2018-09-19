@@ -4,7 +4,8 @@ const devWebpackTask = require('./devWebpack.config');
 const prodWebpackTask = require('./prodWebpack.config');
 
 const paths = require('./paths');
-const INPUT_BUNDLES = paths.INPUT_BUNDLES;
+const INPUT_BUNDLES = paths.INPUT_BUNDLES,
+    BROWSER_SYNC_RELOAD_DELAY = 500;
 
 const gulp = require('gulp');
 const less = require('gulp-less');
@@ -31,41 +32,46 @@ function clean() {
     return del('public');
 }
 
-// function html() {
-//     return gulp.src(INPUT_BUNDLES + '/*.html')
-//         .pipe(gulp.dest('public'))
-//         .pipe(browserSync.stream())
-//         .pipe(gzip())
-//         .pipe(gulp.dest('public'));
-// }
-//
-// function imgs() {
-//     return gulp.src(INPUT_BUNDLES + '/*.png')
-//         .pipe(gulp.dest('public'))
-// }
-
-function serve() {
-    nodemon({
-        script: 'server.js',
-        browser: "chrome"
-    })
-        .on('restart', function () {
-            console.log('restarted!')
-        });
+function browsersync () {
+    browserSync.init(null, {
+        proxy: "http://localhost:5000",
+        files: ["./public/**/*.*"],
+        browser: "chrome",
+        port: 7000,
+    });
 }
 
+function nodemonTask(cb) {
+
+    let started = false;
+
+    return nodemon({
+        script: 'server.js'
+    }).on('start', function () {
+        if (!started) {
+            cb();
+            started = true;
+        }
+    }).on('restart', function onRestart() {
+        setTimeout(function reload() {
+            browserSync.reload({
+                stream: false
+            });
+        }, BROWSER_SYNC_RELOAD_DELAY);
+    });
+}
 
 function watch() {
     gulp.watch(INPUT_BUNDLES + '/*.*', gulp.series(styles));
-    // gulp.watch(INPUT_BUNDLES + '/*.*', gulp.series(html));
 }
 
 gulp.task('devBuild', gulp.series(clean, gulp.parallel(styles)));
 gulp.task('prodBuild', gulp.series(clean, gulp.parallel(styles, prodWebpackTask)));
 
 gulp.task('default',
-    gulp.series('devBuild', gulp.parallel(watch))
+    gulp.series('devBuild', gulp.parallel(watch, browsersync, nodemonTask))
 );
+
 gulp.task('prod',
     gulp.series('prodBuild')
 );
