@@ -1,0 +1,1 @@
+module.exports.DIR_COMPONENTS = __dirname + '/src/components/';

@@ -4,8 +4,9 @@ const devWebpackTask = require('./devWebpack.config');
 const prodWebpackTask = require('./prodWebpack.config');
 
 const paths = require('./paths');
-const INPUT_BUNDLES = paths.INPUT_BUNDLES,
-    BROWSER_SYNC_RELOAD_DELAY = 500;
+const INPUT_BUNDLES = paths.INPUT_BUNDLES;
+const OUTPUT_DIR = paths.OUTPUT_DIR;
+const BROWSER_SYNC_RELOAD_DELAY = 500;
 
 const gulp = require('gulp');
 const less = require('gulp-less');
@@ -21,30 +22,28 @@ function styles() {
         .pipe(less())
         .pipe(concat('all.css'))
         .pipe(minifyCss())
-        .pipe(gulp.dest('public'))
+        .pipe(gulp.dest(OUTPUT_DIR))
         .pipe(browserSync.stream())
         .pipe(gzip())
-        .pipe(gulp.dest('public'));
+        .pipe(gulp.dest(OUTPUT_DIR));
 }
 
 
 function clean() {
-    return del('public');
+    return del(OUTPUT_DIR);
 }
 
 function browsersync () {
     browserSync.init(null, {
-        proxy: "http://localhost:5000",
+        proxy: "http://localhost:3030",
         files: ["./public/**/*.*"],
         browser: "chrome",
-        port: 7000,
+        port: 3000,
     });
 }
 
 function nodemonTask(cb) {
-
     let started = false;
-
     return nodemon({
         script: 'server.js'
     }).on('start', function () {
@@ -65,7 +64,7 @@ function watch() {
     gulp.watch(INPUT_BUNDLES + '/*.*', gulp.series(styles));
 }
 
-gulp.task('devBuild', gulp.series(clean, gulp.parallel(styles)));
+gulp.task('devBuild', gulp.series(clean, gulp.parallel(styles, devWebpackTask)));
 gulp.task('prodBuild', gulp.series(clean, gulp.parallel(styles, prodWebpackTask)));
 
 gulp.task('default',

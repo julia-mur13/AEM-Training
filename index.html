@@ -3,13 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>Example</title>
-    <link rel="stylesheet" href="/all.css">
-    <!--<script src="/js/home.js"></script>-->
+    <link rel="stylesheet" href="all.css">
+    <script src="bundle.js"></script>
 </head>
 <body>
-<header>
-    {{Header}}
-</header>
+    {{> Header}}
 <main>
     <div class="main-container">
         <div class="posts-row">
@@ -46,6 +44,6 @@
         </div>
     </div>
 </main>
-{{Footer}}
+{{> Footer}}
 </body>
 </html>

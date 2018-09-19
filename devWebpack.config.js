@@ -1,45 +1,40 @@
 const paths = require('./paths');
-const INPUT_BUNDLES = paths.INPUT_BUNDLES;
+const INPUT_JS = paths.INPUT_JS;
+const OUTPUT_DIR = paths.OUTPUT_DIR;
 
 const gulp = require('gulp');
 const webpackStream = require('webpack-stream');
 const named = require('vinyl-named');
+// const browserSync = require('browser-sync').create();
 
 module.exports = function (callback) {
     let firstBuildReady = false;
 
-    function done(err) {
-        firstBuildReady = true;
-        if (err) {
-            return;
-        }
-    }
-
     let options = {
-        context: __dirname + INPUT_BUNDLES,
+        context: __dirname + '/src/components/design1.0/bundles',
         entry: {
-            home: './bundle1',
+            bundle: './bundle',
             // about: './about'
         },
         output: {
-            path: __dirname + '/public',
+            path: __dirname + '/' + OUTPUT_DIR,
             filename: '[name].js',
             library: '[name]'
         },
-        watch: true,
+        // watch: true,
         devtool: "cheap-module-inline-source-map",
         module: {
             rules: [{
-                test: /\.js/,
+                test: /\.js$/,
                 exclude: /node_modules/,
                 use: ['babel-loader']
             }]
         },
     };
-    return gulp.src(INPUT_BUNDLES + '/*.js')
+    return gulp.src(INPUT_JS)
         .pipe(named())
-        .pipe(webpackStream(options, null, done))
-        .pipe(gulp.dest('public'))
+        .pipe(webpackStream(options))
+        .pipe(gulp.dest(OUTPUT_DIR))
         .on('data', function () {
             if (firstBuildReady) {
                 callback();
