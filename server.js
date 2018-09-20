@@ -3,7 +3,6 @@ const app = express();
 const exphbs = require('express-hbs');
 const partials = require('./partials');
 const pathsArray = partials.pathsArray;
-// hbs.registerPartials('../src/components');
 
 app.use(express.static(__dirname + '/public'));
 
@@ -16,8 +15,6 @@ app.engine('.html', exphbs.express4({
 }));
 
 app.get('/', function (req, res) {
-    // exphbs.registerPartial('Post', '{{Post}}');
-
     exphbs.registerHelper('page', function () {
         return 'Post';
     });
@@ -25,8 +22,6 @@ app.get('/', function (req, res) {
 });
 
 app.get('/readmore', function (req, res) {
-    // exphbs.registerPartial('Post', '{{Post}}');
-
     exphbs.registerHelper('page', function () {
         return 'TestComponent';
     });

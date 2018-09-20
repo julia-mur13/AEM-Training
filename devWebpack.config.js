@@ -5,7 +5,6 @@ const OUTPUT_DIR = paths.OUTPUT_DIR;
 const gulp = require('gulp');
 const webpackStream = require('webpack-stream');
 const named = require('vinyl-named');
-// const browserSync = require('browser-sync').create();
 
 module.exports = function (callback) {
     let firstBuildReady = false;
