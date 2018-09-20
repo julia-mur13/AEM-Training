@@ -1,4 +1,4 @@
-const paths = require('./paths');
+const paths = require('../paths/config-paths');
 const INPUT_JS = paths.INPUT_JS;
 const OUTPUT_DIR = paths.OUTPUT_DIR;
 
@@ -6,13 +6,15 @@ const gulp = require('gulp');
 const gzip = require('gulp-gzip');
 const webpackStream = require('webpack-stream');
 const named = require('vinyl-named');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
 
 module.exports = function () {
     let options = {
-        context: __dirname + '/src/components/design1.0/bundles',
+        context: __dirname + '/../src/components/design1.0/bundle-content',
         entry: {
-            home: './home',
-            about: './about'
+            bundle: './bundle',
+            // about: './about'
         },
         output: {
             path: __dirname + '/' + OUTPUT_DIR,
@@ -28,6 +30,15 @@ module.exports = function () {
                 use: ['babel-loader']
             }]
         },
+
+        // optimization: {
+        //     minimizer: [
+        //         new UglifyJsPlugin({
+        //             test: /\.js$/ ,
+        //             exclude: /node_modules/,
+        //         })
+        //     ]
+        // }
 
     };
     return gulp.src(INPUT_JS)

@@ -1,4 +1,4 @@
-const paths = require('./paths');
+const paths = require('../paths/config-paths');
 const INPUT_JS = paths.INPUT_JS;
 const OUTPUT_DIR = paths.OUTPUT_DIR;
 
@@ -10,7 +10,7 @@ module.exports = function (callback) {
     let firstBuildReady = false;
 
     let options = {
-        context: __dirname + '/src/components/design1.0/bundles',
+        context: __dirname + '/../src/components/design1.0/bundle-content',
         entry: {
             bundle: './bundle',
             // about: './about'

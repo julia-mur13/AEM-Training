@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const exphbs = require('express-hbs');
-const partials = require('./partials');
+const partials = require('./paths/partials');
 const pathsArray = partials.pathsArray;
 
 app.use(express.static(__dirname + '/public'));
@@ -16,14 +16,14 @@ app.engine('.html', exphbs.express4({
 
 app.get('/', function (req, res) {
     exphbs.registerHelper('page', function () {
-        return 'Post';
+        return 'Main';
     });
     res.render('index');
 });
 
 app.get('/readmore', function (req, res) {
     exphbs.registerHelper('page', function () {
-        return 'TestComponent';
+        return 'TestPage';
     });
     res.render('index');
 });
