@@ -13,15 +13,18 @@ const less = require('gulp-less');
 const concat = require('gulp-concat');
 const del = require('del');
 const minifyCss = require('gulp-clean-css');
+const sourcemaps = require('gulp-sourcemaps');
 const gzip = require('gulp-gzip');
 const nodemon = require('gulp-nodemon');
 const browserSync = require('browser-sync').create();
 
 function styles() {
     return gulp.src(INPUT_BUNDLE + '/*.less')
+        .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(concat('all.css'))
         .pipe(minifyCss())
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest(OUTPUT_DIR))
         .pipe(browserSync.stream())
         .pipe(gzip())
@@ -36,9 +39,20 @@ function clean() {
 function browserSyncTask () {
     browserSync.init(null, {
         proxy: "http://localhost:3030",
-        files: ["./public/**/*.*"],
+        // files: ["./public/**/*.*"],
+        // server: {
+        //     baseDir: './test-pages',
+        //     directory: true,
+        // },
         browser: "chrome",
         port: 3000,
+        // middleware: [{
+        //     route: "/server.js",
+        //     handle: function (req, res, next) {
+        //        console.log('a');
+        //        next();
+        //     },
+        // }]
     });
 }
 
@@ -74,5 +88,5 @@ gulp.task('default',
 );
 
 gulp.task('prod',
-    gulp.series('prodBuild')
+    gulp.series('prodBuild', nodemonTask)
 );

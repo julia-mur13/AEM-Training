@@ -6,7 +6,6 @@ const gulp = require('gulp');
 const gzip = require('gulp-gzip');
 const webpackStream = require('webpack-stream');
 const named = require('vinyl-named');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 
 module.exports = function () {
@@ -21,31 +20,22 @@ module.exports = function () {
             filename: '[name].js',
             library: '[name]'
         },
+        mode: 'production',
         watch: false,
-        devtool: false,
         module: {
             rules: [{
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: ['babel-loader']
             }]
-        },
-
-        // optimization: {
-        //     minimizer: [
-        //         new UglifyJsPlugin({
-        //             test: /\.js$/ ,
-        //             exclude: /node_modules/,
-        //         })
-        //     ]
-        // }
+        }
 
     };
     return gulp.src(INPUT_JS)
         .pipe(named())
         .pipe(webpackStream(options))
-        .pipe(gulp.dest('public/js'))
+        .pipe(gulp.dest(OUTPUT_DIR))
         .pipe(gzip())
-        .pipe(gulp.dest('public/js'))
+        .pipe(gulp.dest(OUTPUT_DIR))
 };
 

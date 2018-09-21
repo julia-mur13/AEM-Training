@@ -10,6 +10,7 @@ module.exports = function (callback) {
     let firstBuildReady = false;
 
     let options = {
+        mode: 'development',
         context: __dirname + '/../src/components/design1.0/bundle-content',
         entry: {
             bundle: './bundle',
