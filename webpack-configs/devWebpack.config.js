@@ -11,7 +11,7 @@ module.exports = function (callback) {
 
     let options = {
         mode: 'development',
-        context: __dirname + '/../src/components/design1.0/bundle-content',
+        context: __dirname + '/../src/components/bundle-content',
         entry: {
             bundle: './bundle',
             // about: './about'
@@ -21,7 +21,6 @@ module.exports = function (callback) {
             filename: '[name].js',
             library: '[name]'
         },
-        // watch: true,
         devtool: "cheap-module-inline-source-map",
         module: {
             rules: [{

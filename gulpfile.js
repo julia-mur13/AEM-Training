@@ -36,23 +36,11 @@ function clean() {
     return del(OUTPUT_DIR);
 }
 
-function browserSyncTask () {
+function browserSyncTask() {
     browserSync.init(null, {
         proxy: "http://localhost:3030",
-        // files: ["./public/**/*.*"],
-        // server: {
-        //     baseDir: './test-pages',
-        //     directory: true,
-        // },
         browser: "chrome",
         port: 3000,
-        // middleware: [{
-        //     route: "/server.js",
-        //     handle: function (req, res, next) {
-        //        console.log('a');
-        //        next();
-        //     },
-        // }]
     });
 }
 
@@ -75,9 +63,8 @@ function nodemonTask(cb) {
 }
 
 function watch() {
-    gulp.watch(INPUT_BUNDLE + '/*.less', gulp.series(styles));
-    gulp.watch(INPUT_BUNDLE + '/*.js', gulp.series(devWebpackTask));
-
+    gulp.watch(INPUT_BUNDLE + '/*.less', { usePolling: true }, gulp.series(styles));
+    gulp.watch(INPUT_BUNDLE + '/*.js', { usePolling: true }, gulp.series(devWebpackTask));
 }
 
 gulp.task('devBuild', gulp.series(clean, gulp.parallel(styles, devWebpackTask)));
