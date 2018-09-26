@@ -12,7 +12,12 @@
 <main>
     <div class="main-container">
         {{> PostSection}}
-        {{> PostSection}}
+        <section class="posts-row">
+            <div class="posts-container">
+                {{> Post}}
+                {{> Post}}
+            </div>
+        </section>
     </div>
 </main>
 {{> Footer}}
