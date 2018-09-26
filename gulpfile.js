@@ -9,14 +9,18 @@ const OUTPUT_DIR = paths.OUTPUT_DIR;
 const BROWSER_SYNC_RELOAD_DELAY = 500;
 
 const gulp = require('gulp');
+const eslint = require('gulp-eslint');
 const less = require('gulp-less');
 const concat = require('gulp-concat');
-const del = require('del');
 const minifyCss = require('gulp-clean-css');
-const sourcemaps = require('gulp-sourcemaps');
 const gzip = require('gulp-gzip');
+const sourcemaps = require('gulp-sourcemaps');
+const del = require('del');
+
 const nodemon = require('gulp-nodemon');
 const browserSync = require('browser-sync').create();
+
+
 
 function styles() {
     return gulp.src(INPUT_BUNDLE + '/*.less')
@@ -61,13 +65,19 @@ function nodemonTask(cb) {
         }, BROWSER_SYNC_RELOAD_DELAY);
     });
 }
+function eslintTask() {
+    return gulp.src([INPUT_BUNDLE + '/*.js', '!node_modules/**'])
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
+}
 
 function watch() {
     gulp.watch(INPUT_BUNDLE + '/*.less', { usePolling: true }, gulp.series(styles));
     gulp.watch(INPUT_BUNDLE + '/*.js', { usePolling: true }, gulp.series(devWebpackTask));
 }
 
-gulp.task('devBuild', gulp.series(clean, gulp.parallel(styles, devWebpackTask)));
+gulp.task('devBuild', gulp.series(clean, eslintTask, gulp.parallel(styles, devWebpackTask)));
 gulp.task('prodBuild', gulp.series(clean, gulp.parallel(styles, prodWebpackTask)));
 
 gulp.task('default',
