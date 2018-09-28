@@ -1,4 +1,6 @@
 footer {
+  display: flex;
+  flex-direction: column;
   height: 70px;
   width: 100%;
   flex-shrink: 0;
@@ -31,6 +33,10 @@ footer {
 }
 
 @media screen and (max-width: 1000px) {
+  footer {
+    height: 150px;
+    justify-content: center;
+  }
 
   .footer-container {
     flex-direction: column;
