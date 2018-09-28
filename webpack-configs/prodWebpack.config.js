@@ -9,36 +9,37 @@ const named = require('vinyl-named');
 
 
 module.exports = function () {
-    let options = {
-        context: __dirname + '/../src/components/design1.0/bundle-content',
-        entry: {
-            bundle: './bundle',
-            // about: './about'
-        },
-        output: {
-            path: __dirname + '/' + OUTPUT_DIR,
-            filename: '[name].js',
-            library: '[name]'
-        },
-        mode: 'production',
-        resolve: {
-            extensions: [".ts", ".tsx", ".js"]
-        },
-        watch: false,
-        module: {
-            rules: [{
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: ['babel-loader']
-            }]
-        }
+  let options = {
+    context: __dirname + '/../src/components/design1.0/bundle-content',
+    entry: {
+      bundle: './bundle',
+      // about: './about'
+    },
+    output: {
+      path: __dirname + '/' + OUTPUT_DIR,
+      filename: '[name].js',
+      library: '[name]'
+    },
+    mode: 'production',
+    watch: false,
+    resolve: {
+      extensions: ['.ts', '.tsx', '.js']
+    },
+    watch: false,
+    module: {
+      rules: [{
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: ['babel-loader']
+      }]
+    }
 
-    };
-    return gulp.src(INPUT_JS)
-        .pipe(named())
-        .pipe(webpackStream(options))
-        .pipe(gulp.dest(OUTPUT_DIR))
-        .pipe(gzip())
-        .pipe(gulp.dest(OUTPUT_DIR))
+  };
+  return gulp.src(INPUT_JS)
+    .pipe(named())
+    .pipe(webpackStream(options))
+    .pipe(gulp.dest(OUTPUT_DIR))
+    .pipe(gzip())
+    .pipe(gulp.dest(OUTPUT_DIR))
 };
 
