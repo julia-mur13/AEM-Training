@@ -1,32 +1,35 @@
+const path = require('path');
 const paths = require('../paths/config-paths');
 const INPUT_JS = paths.INPUT_JS;
 const OUTPUT_DIR = paths.OUTPUT_DIR;
+const CONTEXT_PATH = path.join( __dirname, '/../src/components/bundle-content');
 
 const gulp = require('gulp');
 const webpackStream = require('webpack-stream');
 const named = require('vinyl-named');
 
-module.exports = function (callback) {
-    let firstBuildReady = false;
-
+module.exports = function () {
     let options = {
         mode: 'development',
-        context: __dirname + '/../src/components/bundle-content',
+        context: CONTEXT_PATH,
         entry: {
-            bundle: './bundle',
+            bundle: './bundle.ts',
             // about: './about'
         },
+        resolve: {
+            extensions: [".ts", ".js"]
+        },
         output: {
-            path: __dirname + '/' + OUTPUT_DIR,
+            path: path.join(__dirname, '/', OUTPUT_DIR),
             filename: '[name].js',
             library: '[name]'
         },
         devtool: "cheap-module-inline-source-map",
         module: {
             rules: [{
-                test: /\.js$/,
+                test: /\.ts$/,
                 exclude: /node_modules/,
-                use: ['babel-loader']
+                use: ['ts-loader']
             }]
         },
     };
@@ -34,10 +37,5 @@ module.exports = function (callback) {
         .pipe(named())
         .pipe(webpackStream(options))
         .pipe(gulp.dest(OUTPUT_DIR))
-        .on('data', function () {
-            if (firstBuildReady) {
-                callback();
-            }
-        })
 };
 
