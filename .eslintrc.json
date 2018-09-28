@@ -3,11 +3,12 @@
     "browser": true,
     "node": true
   },
-  "parser": "babel-eslint",
+  "parser": "typescript-eslint-parser",
   "extends": "eslint:recommended",
   "rules": {
     "no-console": "error",
-    "import/no-named-as-default":0,
+//    "import/no-named-as-default":0,
+    "eslint-plugin-import": true,
     "linebreak-style": 0,
     "function-paren-newline": ["error", "consistent"],
     "object-curly-newline": ["error", { "consistent": true }]

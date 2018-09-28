@@ -21,6 +21,9 @@ module.exports = function () {
             library: '[name]'
         },
         mode: 'production',
+        resolve: {
+            extensions: [".ts", ".tsx", ".js"]
+        },
         watch: false,
         module: {
             rules: [{

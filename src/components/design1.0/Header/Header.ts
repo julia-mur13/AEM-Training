@@ -1,6 +1,4 @@
-'use strict';
-
-function welcome(message) {
+function welcome(message: string) {
     alert(message + '!');
 }
 
