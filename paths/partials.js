@@ -7,5 +7,6 @@ module.exports.pathsArray = [
     DIR_COMPONENTS + 'design1.0/Post',
     DIR_COMPONENTS + 'design1.0/Header',
     DIR_COMPONENTS + 'design1.0/Footer',
+    DIR_COMPONENTS + 'design1.0/Carousel',
     DIR_TEST_PAGES,
 ];
