@@ -48,7 +48,7 @@ function renderDir(res, pathDir, fsPath) {
 app.get('/*', function (req, res, next) {
     const pathName = url.parse(req.url).pathname;
 
-    if (/\.(js|css|ico)$/.test(pathName)) {
+    if (/\.(js|css|ico|jpg)$/.test(pathName)) {
         next();
         return;
     }
