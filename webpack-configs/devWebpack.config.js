@@ -14,7 +14,7 @@ module.exports = function () {
         mode: 'development',
         context: CONTEXT_PATH,
         entry: {
-            bundle: './bundle.ts',
+            bundle: './bundle.js',
             // about: './about'
         },
         watch: false,

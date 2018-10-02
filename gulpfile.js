@@ -77,7 +77,7 @@ function eslintTask() {
 
 function watch() {
   gulp.watch(INPUT_BUNDLE + '/*.less', { usePolling: true }, gulp.series(styles));
-  gulp.watch(INPUT_BUNDLE + '/*.ts', { usePolling: true }, gulp.series(devWebpackTask));
+  gulp.watch(INPUT_BUNDLE + '/*.js', { usePolling: true }, gulp.series(devWebpackTask));
 }
 
 // const tsProject = typescript.createProject("tsconfig.json", { typescript: require('typescript') });
