@@ -1,29 +1,30 @@
 .carousel-wrapper {
-  min-width: 250px;
-  width: 27%;
-  height: 380px;
   position: relative;
+  height: 380px;
+  width: 27%;
+  min-width: 250px;
+  background: #ffffff;
+  overflow: hidden;
+  margin: 30px 19/6% 10px 19/6%;
+  cursor: pointer;
+  word-wrap: break-word;
+  line-height: 25px;
   outline: 2px solid transparent;
   transition: outline-offset .5s ease-out, outline .5s ease-out;
   -o-transition: outline-offset .5s ease-out, outline .5s ease-out;
   -ms-transition: outline-offset .5s ease-out, outline .5s ease-out;
   -moz-transition: outline-offset .5s ease-out, outline .5s ease-out;
   -webkit-transition: outline-offset .5s ease-out, outline .5s ease-out;
-  overflow: hidden;
-  line-height: 25px;
-  background: #ffffff;
-  margin: 30px 19/6% 10px 19/6%;
-  cursor: pointer;
-  word-wrap: break-word;
 }
 
 .carousel-item {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  z-index: 1;
   position: absolute;
   height: 100%;
+  align-items: center;
+  z-index: 1;
+
 }
 
 .showing {
@@ -32,53 +33,53 @@
 }
 
 .carousel-controls {
+  display: inline-block;
   position: absolute;
+  width: 20px;
+  height: 100%;
   z-index: 3;
   background: #ffffff;
   opacity: 0.1;
-  display: inline-block;
-  width: 20px;
-  height: 100%;
-  color: #fff;
+  transition: opacity 0.3s ease-in;
   padding: 20px 20px;
-  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
   border: none;
   outline: none;
-  cursor: pointer;
-  transition: opacity 0.3s ease-in;
+  font-size: 20px;
 }
 
-.dot {
-  cursor: pointer;
+.carousel-dot {
+  display: inline-block;
   height: 15px;
   width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
+  background-color: #ebebeb;
   transition: background-color 0.6s ease;
+  margin: 0 2px;
+  cursor: pointer;
+  border-radius: 50%;
   z-index: 3;
 }
 
-.dots-wrapper{
-  width: 100%;
+.dots-wrapper {
   display: flex;
   justify-content: center;
-  z-index: 4;
   position: absolute;
+  width: 100%;
+  z-index: 4;
   bottom: 0;
   margin-bottom: 15px;
 }
 
-.active-dot, .dot:hover {
-  background-color: #717171;
+.active-dot, .carousel-dot:hover {
+  background-color: #b8b8b8;
 }
 
 .carousel-item {
-  font-size: 40px;
-  box-sizing: border-box;
   background: #ffffff;
+  box-sizing: border-box;
   background-size: cover;
+  font-size: 40px;
 }
 
 .arrow-next-btn {
@@ -120,16 +121,17 @@
 }
 
 @media screen and (max-width: 655px) {
-  .carousel-img-arrow{
+  .carousel-img-arrow {
     top: 225px;
   }
+
   .carousel-wrapper {
     height: 500px;
     width: 95%;
   }
 }
 
-@media screen and (max-width: 1050px) and (min-width: 655px)  {
+@media screen and (max-width: 1050px) and (min-width: 655px) {
   .carousel-wrapper {
     width: 43.6%;
   }

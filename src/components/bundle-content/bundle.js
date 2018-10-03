@@ -15,7 +15,7 @@
     function goToSlide(currentSlide, id, nextSlide) {
         const currentCarousel = document.getElementById(`${id}`);
         const slides = currentCarousel.querySelectorAll('.carousel-items .carousel-item');
-        const navDots = currentCarousel.getElementsByClassName('dot');
+        const navDots = currentCarousel.getElementsByClassName('carousel-dot');
         slides[currentSlide].classList.remove('showing');
         navDots[currentSlide].classList.remove('active-dot');
         currentSlide = (nextSlide + slides.length) % slides.length;

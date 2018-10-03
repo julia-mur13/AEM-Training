@@ -3,40 +3,52 @@
   flex-direction: column;
   align-items: center;
   position: relative;
+  height: 380px;
+  width: 27%;
+  min-width: 250px;
+  background: #ffffff;
+  margin: 30px 19/6% 10px 19/6%;
+  overflow: hidden;
+  cursor: pointer;
+  word-wrap: break-word;
   outline: 2px solid transparent;
   transition: outline-offset .5s ease-out, outline .5s ease-out;
   -o-transition: outline-offset .5s ease-out, outline .5s ease-out;
   -ms-transition: outline-offset .5s ease-out, outline .5s ease-out;
   -moz-transition: outline-offset .5s ease-out, outline .5s ease-out;
   -webkit-transition: outline-offset .5s ease-out, outline .5s ease-out;
-  overflow: hidden;
-  height: 380px;
-  width: 27%;
-  background: #ffffff;
-  margin: 30px 19/6% 10px 19/6%;
-  cursor: pointer;
-  word-wrap: break-word;
-  min-width: 250px;
 }
 
-.parent-post-text {
-  width: 80%;
-  position: relative;
-  line-height: 25px;
-  overflow: hidden;
-  height: 55%;
+h1{
+  font-family: "Segoe UI",Arial,sans-serif;
+  font-size: 25px;
+  font-weight: 400;
+  letter-spacing: 0.7px;
 }
+p{
+  text-align: justify!important;
+}
+.parent-post-text {
+  position: relative;
+  width: 80%;
+  height: 55%;
+  overflow: hidden;
+  line-height: 25px;
+}
+
 .post-text {
   display: block;
-  font-size: 15px;
-  color: #000000;
   padding: 1em;
+  color: #000000;
+  font-size: 15px;
+  transition: opacity 0.5s;
 }
+
 .post-title {
   text-align: center;
   padding: 30px 15px 15px 15px;
-  font-size: 20px;
   color: #000000;
+  transition: opacity 0.5s;
 }
 
 .parent-post-text::after {
@@ -68,5 +80,9 @@
 .post:hover {
   outline: 2px solid #b0b2b1;
   outline-offset: 5px;
+}
+
+.post-title:hover, .post-text:hover{
+  opacity: 0.7;
 }
 
