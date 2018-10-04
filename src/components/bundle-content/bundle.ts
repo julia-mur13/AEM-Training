@@ -1,5 +1,5 @@
-import welcome from '../design1.0/Header/Header';
-welcome('HELLO');
+// import welcome from '../design1.0/Header/Header';
+// welcome('HELLO');
 (function () {
     function initCarouselDots() {
         let currentSlide = 0;
