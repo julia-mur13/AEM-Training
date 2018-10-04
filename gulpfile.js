@@ -77,7 +77,7 @@ function eslintTask() {
 
 function watch() {
   gulp.watch(INPUT_BUNDLE + '/*.less', { usePolling: true }, gulp.series(styles));
-  gulp.watch(INPUT_BUNDLE + '/*.js', { usePolling: true }, gulp.series(devWebpackTask));
+  gulp.watch(INPUT_BUNDLE + '/*.ts', { usePolling: true }, gulp.series(devWebpackTask));
 }
 
 // const tsProject = typescript.createProject("tsconfig.json", { typescript: require('typescript') });
@@ -90,7 +90,7 @@ function watch() {
 //         .pipe(gulp.dest("build/"));
 // }
 
-gulp.task('devBuild', gulp.series(clean, gulp.parallel(styles, devWebpackTask)));
+gulp.task('devBuild', gulp.series(clean, eslintTask, gulp.parallel(styles, devWebpackTask)));
 gulp.task('prodBuild', gulp.series(clean, gulp.parallel(styles, prodWebpackTask)));
 
 gulp.task('devWebpackTask', devWebpackTask);
