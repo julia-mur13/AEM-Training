@@ -9,11 +9,20 @@
   },
   "extends": "eslint:recommended",
   "rules": {
-    "no-console": "error",
-//    "import/no-named-as-default":0,
+    "no-console": "off",
+    //    "import/no-named-as-default":0,
     "eslint-plugin-import": true,
+    "no-undef": "off",
     "linebreak-style": 0,
-    "function-paren-newline": ["error", "consistent"],
-    "object-curly-newline": ["error", { "consistent": true }]
+    "function-paren-newline": [
+      "error",
+      "consistent"
+    ],
+    "object-curly-newline": [
+      "error",
+      {
+        "consistent": true
+      }
+    ]
   }
 }
