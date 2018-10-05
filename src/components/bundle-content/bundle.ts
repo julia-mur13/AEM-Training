@@ -1,14 +1,6 @@
-// import welcome from '../design1.0/Header/Header';
-// welcome('HELLO');
+import welcome from '../design1.0/Header/Header';
+welcome('HELLO');
 (function () {
-    function initCarouselDots() {
-        let currentSlide = 0;
-        const carousels = document.getElementsByClassName('carousel-wrapper');
-        for (let index = 0; index < carousels.length; index++) {
-            goToSlide(currentSlide, carousels[index].id, currentSlide);
-        }
-    }
-
     function getCurrentSlide(id: string) {
         const currentCarousel = document.getElementById(`${id}`);
         const activeDot = currentCarousel.querySelector('.active-dot') as HTMLDivElement;
@@ -64,7 +56,6 @@
         }
     }
 
-    initCarouselDots();
     clickPreviousSlide();
     clickNextSlide();
     clickDot();
