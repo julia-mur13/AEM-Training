@@ -3,11 +3,14 @@ const paths = require('../paths/config-paths');
 const INPUT_JS = paths.INPUT_JS;
 const OUTPUT_DIR = paths.OUTPUT_DIR;
 const CONTEXT_PATH = path.join(__dirname, '/../src/components/bundle-content');
+const TS_CONFIG = path.join(__dirname, '../tsconfig.json');
 
 const gulp = require('gulp');
 const webpackStream = require('webpack-stream');
 const named = require('vinyl-named');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const browserSync = require('browser-sync').create();
+
 
 module.exports = function () {
     let options = {
@@ -17,23 +20,32 @@ module.exports = function () {
             bundle: './bundle.ts',
             // about: './about'
         },
-        watch: false,
-        resolve: {
-            extensions: ['.ts', '.js']
-        },
+        devtool: 'inline-source-map',
         output: {
             path: path.join(__dirname, '/', OUTPUT_DIR),
             filename: '[name].js',
             library: '[name]'
         },
-        devtool: 'inline-source-map',
+
         module: {
             rules: [{
                 test: /\.ts?$/,
+                loader: 'ts-loader',
                 exclude: /node_modules/,
-                use: ['ts-loader']
+                options: {
+                    transpileOnly: true,
+                    configFile: TS_CONFIG
+                }
             }]
         },
+        plugins: [
+            new ForkTsCheckerWebpackPlugin({
+                tsconfig: TS_CONFIG
+            })
+        ],
+        resolve: {
+            extensions: ['.ts', '.js']
+        }
     };
     return gulp.src(INPUT_JS)
         .pipe(named())

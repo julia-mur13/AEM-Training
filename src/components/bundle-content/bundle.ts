@@ -1,6 +1,3 @@
-import welcome from '../design1.0/Header/Header';
-
-welcome('HELLO');
 (function () {
     function getCurrentSlide(currentCarousel: HTMLDivElement): number {
         const activeDot = currentCarousel.querySelector('.active-dot') as HTMLDivElement;

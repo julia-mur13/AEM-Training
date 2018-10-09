@@ -16,8 +16,6 @@ const minifyCss = require('gulp-clean-css');
 const gzip = require('gulp-gzip');
 const sourcemaps = require('gulp-sourcemaps');
 const del = require('del');
-const typescript = require('gulp-typescript');
-const rename = require('gulp-rename');
 
 const nodemon = require('gulp-nodemon');
 const browserSync = require('browser-sync').create();
@@ -79,16 +77,6 @@ function watch() {
   gulp.watch(INPUT_BUNDLE + '/*.less', { usePolling: true }, gulp.series(styles));
   gulp.watch(INPUT_BUNDLE + '/*.ts', { usePolling: true }, gulp.series(devWebpackTask));
 }
-
-// const tsProject = typescript.createProject("tsconfig.json", { typescript: require('typescript') });
-// function backend() {
-//     const tsResult = gulp.src(INPUT_BUNDLE + '/*.ts')
-//         .pipe(tsProject());
-//
-//     return tsResult.js
-//         .pipe(rename(function (path) { path.dirname = path.dirname.replace("src", ""); }))
-//         .pipe(gulp.dest("build/"));
-// }
 
 gulp.task('devBuild', gulp.series(clean, eslintTask, gulp.parallel(styles, devWebpackTask)));
 gulp.task('prodBuild', gulp.series(clean, gulp.parallel(styles, prodWebpackTask)));
