@@ -8,6 +8,7 @@ module.exports.pathsArray = [
     DIR_COMPONENTS + 'design1.0/Header',
     DIR_COMPONENTS + 'design1.0/Footer',
     DIR_COMPONENTS + 'design1.0/Carousel',
+    DIR_COMPONENTS + 'design1.0/SlideCarousel',
     DIR_COMPONENTS + 'exercises/Clock',
     DIR_COMPONENTS + 'exercises/AnimationLayers',
     DIR_TEST_PAGES,
