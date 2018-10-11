@@ -20,7 +20,6 @@ module.exports = function () {
         context: CONTEXT_PATH,
         entry: {
             bundle: './bundle.ts',
-            // about: './about'
         },
         devtool: 'inline-source-map',
         output: {

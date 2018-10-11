@@ -9,14 +9,12 @@ const OUTPUT_DIR = paths.OUTPUT_DIR;
 const BROWSER_SYNC_RELOAD_DELAY = 500;
 
 const gulp = require('gulp');
-const eslint = require('gulp-eslint');
 const less = require('gulp-less');
 const concat = require('gulp-concat');
 const minifyCss = require('gulp-clean-css');
 const gzip = require('gulp-gzip');
 const sourcemaps = require('gulp-sourcemaps');
 const del = require('del');
-const tslint = require("gulp-tslint");
 
 
 const nodemon = require('gulp-nodemon');
@@ -66,24 +64,6 @@ function nodemonTask(cb) {
           });
       }, BROWSER_SYNC_RELOAD_DELAY);
   });
-}
-
-function eslintTask() {
-  return gulp.src([INPUT_BUNDLE + '/*.ts', '!node_modules/**'])
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
-}
-
-
-function tslintTask() {
-    gulp.src([INPUT_BUNDLE + '/*.ts', '!node_modules/**'])
-        .pipe(tslint({
-            formatter: "verbose"
-        }))
-        .pipe(tslint.report({
-            allowWarnings: true
-        }));
 }
 
 function watch() {
