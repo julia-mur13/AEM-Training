@@ -21,8 +21,15 @@ class SlideCarouselDots extends HTMLElement {
         }
     }
 
+    triggerSlideChange() {
+       this.currentCarousel.addEventListener('sc-slidechanged', (event: any) => {
+           console.log(event.detail);
+       }, true);
+    }
+
     private connectedCallback() {
         this.drawDots();
+        this.triggerSlideChange();
     }
 }
 

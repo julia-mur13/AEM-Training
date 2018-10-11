@@ -4,89 +4,79 @@ class SlideCarousel extends HTMLElement {
         super();
     }
 
-    set currentSlide(numSlide: number) {
-        this.slides[numSlide].classList.add('showing');
-        this.navDots[numSlide].classList.add('active-dot');
+    private connectedCallback() {
+        this.bindEvents();
     }
 
-    get currentSlide(): number {
+    get numCurrentSlide(): number {
         const activeDot = this.querySelector('.active-dot') as HTMLDivElement;
         return +activeDot.title - 1;
     }
 
-    get navDots(): NodeListOf<HTMLSpanElement> {
-        return this.getElementsByClassName('carousel-dot')  as NodeListOf<HTMLSpanElement>;
+    get dotsContainer(): HTMLElement {
+        return this.getElementsByTagName('slide-carousel-dots')[0]  as HTMLElement;
     }
 
     get slides(): NodeListOf<HTMLDivElement> {
-        return this.querySelectorAll('.carousel-items .carousel-item') as NodeListOf<HTMLDivElement>;
+        return this.querySelectorAll('[data-slide-item]') as NodeListOf<HTMLDivElement>;
     }
 
+    public bindEvents() {
+        this.clickArrows();
+    }
 
-    public clickDot() {
-        const dotsArray = this.getElementsByClassName('carousel-dots-wrapper');
-        [].forEach.call(dotsArray, (element: any) => {
-            element.addEventListener('click', (event: any) => {
-                this.goToSlide('DOT', event);
-            });
+    public clickArrows() {
+        this.addEventListener('click', (event) => {
+            if(event.target.dataset.target) {
+                const numNextSlide: number = this.getNumNextSlide(event);
+                this.goToSlide(numNextSlide);
+            }
         });
     }
 
-    public clickPreviousSlide() {
-        const previousArrows = this.getElementsByClassName('arrow-previous-btn');
-        [].forEach.call(previousArrows, (element: any) => {
-            element.addEventListener('click', (event: any) => {
-                this.goToSlide('PREVIOUS', event);
-            });
-        });
-    }
-
-    public clickNextSlide() {
-        const nextArrow = this.querySelector('.arrow-next-btn');
-        nextArrow.addEventListener('click', (event: any) => {
-            this.goToSlide('NEXT', event);
-        });
-    }
-
-
-    public goToSlide(buttonName: string, event: any) {
-        const target = event.target as HTMLButtonElement;
-        const prevCurrentSlide: number = this.currentSlide;
-        if (target.title !== (prevCurrentSlide + 1).toString()) {
-            this.cleanCurrentSlide();
-            this.currentSlide = this.getNewCurrentSlide(buttonName, prevCurrentSlide, target.title);
-        }
-    }
-
-    public cleanCurrentSlide() {
-        this.slides[this.currentSlide].classList.remove('showing');
-        this.navDots[this.currentSlide].classList.remove('active-dot');
-    }
-
-    public getNewCurrentSlide(buttonName: string, prevCurrentSlide: number, dotNextSlide: string): number {
-        let nextSlide: number = prevCurrentSlide;
-        switch (buttonName) {
-            case 'PREVIOUS':
-                nextSlide = prevCurrentSlide - 1;
+    public getNumNextSlide(event: any): number {
+        let numPrevSlide = this.numCurrentSlide;
+        let numNextSlide: number = 0;
+        switch (event.target.dataset.target) {
+            case 'next':
+                numNextSlide = numPrevSlide + 1;
                 break;
-            case 'NEXT':
-                nextSlide = prevCurrentSlide + 1;
-                break;
-            case 'DOT':
-                if (dotNextSlide) {
-                    nextSlide = +dotNextSlide - 1;
-                }
+            case 'prev':
+                numNextSlide = numPrevSlide - 1;
                 break;
             default:
-                nextSlide = prevCurrentSlide;
+                numNextSlide = numPrevSlide;
         }
-        return (nextSlide + this.slides.length) % this.slides.length;
+        return numNextSlide;
     }
 
-    private connectedCallback() {
-        this.clickDot();
-        this.clickPreviousSlide();
-        this.clickNextSlide();
+
+    public goToSlide(numNextSlide: number) {
+        this.hideCurrentSlide();
+        this.showNextSlide(numNextSlide);
+        this.triggerSlideChange();
+    }
+
+    public hideCurrentSlide() {
+        this.slides[this.numCurrentSlide].classList.remove('showing');
+        const currentDot = this.dotsContainer.child[this.numCurrentSlide] as HTMLSpanElement;
+        console.log(currentDot, 7);
+        currentDot.classList.remove('active-dot');
+    }
+
+    public showNextSlide(numNextSlide: number) {
+        this.slides[numNextSlide].classList.add('showing');
+        const currentDot = this.dotsContainer.childNodes[numNextSlide] as HTMLSpanElement;
+        currentDot.classList.add('active-dot');
+    }
+
+    triggerSlideChange() {
+        // const slide = this.currentSlide;
+        const event = new CustomEvent('sc-slidechanged', {
+            bubbles: true,
+            detail: '1'
+        });
+        this.dispatchEvent(event);
     }
 }
 
