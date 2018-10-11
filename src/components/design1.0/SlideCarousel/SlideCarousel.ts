@@ -4,10 +4,9 @@ class SlideCarousel extends HTMLElement {
         super();
     }
 
-    connectedCallback() {
-        this.clickDot();
-        this.clickPreviousSlide();
-        this.clickNextSlide();
+    set currentSlide(numSlide: number) {
+        this.slides[numSlide].classList.add('showing');
+        this.navDots[numSlide].classList.add('active-dot');
     }
 
     get currentSlide(): number {
@@ -15,26 +14,56 @@ class SlideCarousel extends HTMLElement {
         return +activeDot.title - 1;
     }
 
-    set currentSlide(numSlide: number) {
-        this.slides[numSlide].classList.add('showing');
-        this.navDots[numSlide].classList.add('active-dot');
+    get navDots(): NodeListOf<HTMLSpanElement> {
+        return this.getElementsByClassName('carousel-dot')  as NodeListOf<HTMLSpanElement>;
     }
 
     get slides(): NodeListOf<HTMLDivElement> {
         return this.querySelectorAll('.carousel-items .carousel-item') as NodeListOf<HTMLDivElement>;
     }
 
-    get navDots(): NodeListOf<HTMLSpanElement> {
-        return this.getElementsByClassName('carousel-dot')  as NodeListOf<HTMLSpanElement>;
+
+    public clickDot() {
+        const dotsArray = this.getElementsByClassName('carousel-dots-wrapper');
+        [].forEach.call(dotsArray, (element: any) => {
+            element.addEventListener('click', (event: any) => {
+                this.goToSlide('DOT', event);
+            });
+        });
+    }
+
+    public clickPreviousSlide() {
+        const previousArrows = this.getElementsByClassName('arrow-previous-btn');
+        [].forEach.call(previousArrows, (element: any) => {
+            element.addEventListener('click', (event: any) => {
+                this.goToSlide('PREVIOUS', event);
+            });
+        });
+    }
+
+    public clickNextSlide() {
+        const nextArrow = this.querySelector('.arrow-next-btn');
+        nextArrow.addEventListener('click', (event: any) => {
+            this.goToSlide('NEXT', event);
+        });
     }
 
 
-    cleanCurrentSlide() {
+    public goToSlide(buttonName: string, event: any) {
+        const target = event.target as HTMLButtonElement;
+        const prevCurrentSlide: number = this.currentSlide;
+        if (target.title !== (prevCurrentSlide + 1).toString()) {
+            this.cleanCurrentSlide();
+            this.currentSlide = this.getNewCurrentSlide(buttonName, prevCurrentSlide, target.title);
+        }
+    }
+
+    public cleanCurrentSlide() {
         this.slides[this.currentSlide].classList.remove('showing');
         this.navDots[this.currentSlide].classList.remove('active-dot');
     }
 
-    getNewCurrentSlide(buttonName: string, prevCurrentSlide: number, dotNextSlide: string): number {
+    public getNewCurrentSlide(buttonName: string, prevCurrentSlide: number, dotNextSlide: string): number {
         let nextSlide: number = prevCurrentSlide;
         switch (buttonName) {
             case 'PREVIOUS':
@@ -54,40 +83,10 @@ class SlideCarousel extends HTMLElement {
         return (nextSlide + this.slides.length) % this.slides.length;
     }
 
-    goToSlide(buttonName: string, event: any) {
-        const target = event.target as HTMLButtonElement;
-        const prevCurrentSlide: number = this.currentSlide;
-        if(target.title !== (prevCurrentSlide + 1).toString()) {
-            this.cleanCurrentSlide();
-            this.currentSlide = this.getNewCurrentSlide(buttonName, prevCurrentSlide, target.title);
-        }
-    }
-
-    clickPreviousSlide() {
-        const previousArrows = document.getElementsByClassName('arrow-previous-btn');
-        for (let index = 0; index < previousArrows.length; index++) {
-            previousArrows[index].addEventListener('click', (event) => {
-                this.goToSlide('PREVIOUS', event);
-            });
-        }
-    }
-
-    clickNextSlide() {
-        const nextArrows = document.getElementsByClassName('arrow-next-btn');
-        for (let index = 0; index < nextArrows.length; index++) {
-            nextArrows[index].addEventListener('click', (event) => {
-                this.goToSlide('NEXT', event);
-            });
-        }
-    }
-
-    clickDot() {
-        const dotsArray = this.getElementsByClassName('carousel-dots-wrapper');
-        for (let index = 0; index < dotsArray.length; index++) {
-            dotsArray[index].addEventListener('click', (event) => {
-                this.goToSlide('DOT', event);
-            });
-        }
+    private connectedCallback() {
+        this.clickDot();
+        this.clickPreviousSlide();
+        this.clickNextSlide();
     }
 }
 

@@ -4,25 +4,25 @@ class SlideCarouselDots extends HTMLElement {
         super();
     }
 
-    connectedCallback() {
-        this.drawDots();
+    get slides(): NodeListOf<HTMLDivElement> {
+        return this.currentCarousel.querySelectorAll('.carousel-items .carousel-item') as NodeListOf<HTMLDivElement>;
     }
 
     get currentCarousel(): HTMLElement {
         return this.parentElement;
     }
 
-    get slides(): NodeListOf<HTMLDivElement> {
-        return this.currentCarousel.querySelectorAll('.carousel-items .carousel-item') as NodeListOf<HTMLDivElement>;
-    }
-
-    drawDots() {
+    public drawDots() {
         for (let index = 0; index < this.slides.length; index++) {
-            let dot = document.createElement('span');
+            const dot = document.createElement('span');
             dot.className = index === 0 ? "carousel-dot active-dot" : "carousel-dot";
             dot.setAttribute('title', `${index + 1}`);
             this.appendChild(dot);
         }
+    }
+
+    private connectedCallback() {
+        this.drawDots();
     }
 }
 

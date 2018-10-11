@@ -16,6 +16,8 @@ const minifyCss = require('gulp-clean-css');
 const gzip = require('gulp-gzip');
 const sourcemaps = require('gulp-sourcemaps');
 const del = require('del');
+const tslint = require("gulp-tslint");
+
 
 const nodemon = require('gulp-nodemon');
 const browserSync = require('browser-sync').create();
@@ -73,12 +75,23 @@ function eslintTask() {
     .pipe(eslint.failAfterError());
 }
 
+
+function tslintTask() {
+    gulp.src([INPUT_BUNDLE + '/*.ts', '!node_modules/**'])
+        .pipe(tslint({
+            formatter: "verbose"
+        }))
+        .pipe(tslint.report({
+            allowWarnings: true
+        }));
+}
+
 function watch() {
   gulp.watch(INPUT_BUNDLE + '/*.less', { usePolling: true }, gulp.series(styles));
   gulp.watch(INPUT_BUNDLE + '/*.ts', { usePolling: true }, gulp.series(devWebpackTask));
 }
 
-gulp.task('devBuild', gulp.series(clean, eslintTask, gulp.parallel(styles, devWebpackTask)));
+gulp.task('devBuild', gulp.series(clean, gulp.parallel(styles, devWebpackTask)));
 gulp.task('prodBuild', gulp.series(clean, gulp.parallel(styles, prodWebpackTask)));
 
 gulp.task('devWebpackTask', devWebpackTask);
