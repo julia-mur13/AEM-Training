@@ -1,20 +1,12 @@
 class SlideCarousel extends HTMLElement {
-
     constructor() {
         super();
     }
 
-    private connectedCallback() {
-        this.bindEvents();
-    }
 
     get numCurrentSlide(): number {
-        const activeDot = this.querySelector('.active-dot') as HTMLDivElement;
+        const activeDot = this.querySelector('.active-dot') as HTMLSpanElement;
         return +activeDot.title - 1;
-    }
-
-    get dotsContainer(): HTMLElement {
-        return this.getElementsByTagName('slide-carousel-dots')[0]  as HTMLElement;
     }
 
     get slides(): NodeListOf<HTMLDivElement> {
@@ -26,16 +18,18 @@ class SlideCarousel extends HTMLElement {
     }
 
     public clickArrows() {
-        this.addEventListener('click', (event) => {
-            if(event.target.dataset.target) {
+        this.addEventListener('click', (event: any) => {
+            if (event.target.dataset && event.target.dataset.target) {
+                const numCurrentSlide = this.numCurrentSlide;
                 const numNextSlide: number = this.getNumNextSlide(event);
                 this.goToSlide(numNextSlide);
+                this.triggerSlideChange(numCurrentSlide, numNextSlide);
             }
-        });
+        }, false);
     }
 
     public getNumNextSlide(event: any): number {
-        let numPrevSlide = this.numCurrentSlide;
+        const numPrevSlide = this.numCurrentSlide;
         let numNextSlide: number = 0;
         switch (event.target.dataset.target) {
             case 'next':
@@ -47,36 +41,36 @@ class SlideCarousel extends HTMLElement {
             default:
                 numNextSlide = numPrevSlide;
         }
-        return numNextSlide;
+        return (numNextSlide + this.slides.length) % this.slides.length;
     }
 
 
     public goToSlide(numNextSlide: number) {
         this.hideCurrentSlide();
         this.showNextSlide(numNextSlide);
-        this.triggerSlideChange();
     }
 
     public hideCurrentSlide() {
         this.slides[this.numCurrentSlide].classList.remove('showing');
-        const currentDot = this.dotsContainer.child[this.numCurrentSlide] as HTMLSpanElement;
-        console.log(currentDot, 7);
-        currentDot.classList.remove('active-dot');
     }
 
     public showNextSlide(numNextSlide: number) {
         this.slides[numNextSlide].classList.add('showing');
-        const currentDot = this.dotsContainer.childNodes[numNextSlide] as HTMLSpanElement;
-        currentDot.classList.add('active-dot');
     }
 
-    triggerSlideChange() {
-        // const slide = this.currentSlide;
+    private triggerSlideChange(numCurrentSlide: number, numNextSlide: number) {
         const event = new CustomEvent('sc-slidechanged', {
             bubbles: true,
-            detail: '1'
+            detail: {
+                numCurrentSlide: `${numCurrentSlide}`,
+                numNextSlide: `${numNextSlide}`
+            }
         });
         this.dispatchEvent(event);
+    }
+
+    private connectedCallback() {
+        this.bindEvents();
     }
 }
 
