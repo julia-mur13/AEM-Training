@@ -3,7 +3,6 @@ class SlideCarousel extends HTMLElement {
         super();
     }
 
-
     get numCurrentSlide(): number {
         const activeDot = this.querySelector('.active-dot') as HTMLSpanElement;
         return +activeDot.title - 1;
@@ -13,14 +12,23 @@ class SlideCarousel extends HTMLElement {
         return this.querySelectorAll('[data-slide-item]') as NodeListOf<HTMLDivElement>;
     }
 
-    public bindEvents() {
+    public goToSlide(numNextSlide: number) {
+        this.hideCurrentSlide();
+        this.showNextSlide(numNextSlide);
+    }
+
+    private connectedCallback() {
+        this.bindEvents();
+    }
+
+    private bindEvents() {
         this.clickArrows();
     }
 
-    public clickArrows() {
+    private clickArrows() {
         this.addEventListener('click', (event: any) => {
             if (event.target.dataset && event.target.dataset.target) {
-                const numCurrentSlide = this.numCurrentSlide;
+                const numCurrentSlide: number = this.numCurrentSlide;
                 const numNextSlide: number = this.getNumNextSlide(event);
                 this.goToSlide(numNextSlide);
                 this.triggerSlideChange(numCurrentSlide, numNextSlide);
@@ -28,7 +36,7 @@ class SlideCarousel extends HTMLElement {
         }, false);
     }
 
-    public getNumNextSlide(event: any): number {
+    private getNumNextSlide(event: any): number {
         const numPrevSlide = this.numCurrentSlide;
         let numNextSlide: number = 0;
         switch (event.target.dataset.target) {
@@ -45,17 +53,12 @@ class SlideCarousel extends HTMLElement {
     }
 
 
-    public goToSlide(numNextSlide: number) {
-        this.hideCurrentSlide();
-        this.showNextSlide(numNextSlide);
+    private hideCurrentSlide() {
+        this.slides[this.numCurrentSlide].classList.remove('active-slide');
     }
 
-    public hideCurrentSlide() {
-        this.slides[this.numCurrentSlide].classList.remove('showing');
-    }
-
-    public showNextSlide(numNextSlide: number) {
-        this.slides[numNextSlide].classList.add('showing');
+    private showNextSlide(numNextSlide: number) {
+        this.slides[numNextSlide].classList.add('active-slide');
     }
 
     private triggerSlideChange(numCurrentSlide: number, numNextSlide: number) {
@@ -67,10 +70,6 @@ class SlideCarousel extends HTMLElement {
             }
         });
         this.dispatchEvent(event);
-    }
-
-    private connectedCallback() {
-        this.bindEvents();
     }
 }
 

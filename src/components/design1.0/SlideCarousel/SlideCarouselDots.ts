@@ -23,7 +23,12 @@ class SlideCarouselDots extends HTMLElement {
         return this.parentElement;
     }
 
-    public drawDots() {
+    private connectedCallback() {
+        this.drawDots();
+        this.bindEvents();
+    }
+
+    private drawDots() {
         for (let index = 0; index < this.slides.length; index++) {
             const dot = document.createElement('span');
             dot.className = index === 0 ? "carousel-dot active-dot" : "carousel-dot";
@@ -33,19 +38,19 @@ class SlideCarouselDots extends HTMLElement {
         }
     }
 
-    public bindEvents() {
+    private bindEvents() {
         this.clickArrows();
         this.clickDot();
     }
 
-    public clickArrows() {
+    private clickArrows() {
         this.currentCarousel.addEventListener('sc-slidechanged', (event: any) => {
             this.hideCurrentDot(event.detail.numCurrentSlide);
             this.showNextDot(event.detail.numNextSlide);
         }, false);
     }
 
-    public clickDot() {
+    private clickDot() {
         this.addEventListener('click', (event: any) => {
             const numNextSlide: number = event.target.title - 1;
             if (event.target.title) {
@@ -57,17 +62,12 @@ class SlideCarouselDots extends HTMLElement {
         }, false);
     }
 
-    public hideCurrentDot(numCurrentSlide: number) {
+    private hideCurrentDot(numCurrentSlide: number) {
         this.dotsArray[numCurrentSlide].classList.remove('active-dot');
     }
 
-    public showNextDot(numNextSlide: number) {
+    private showNextDot(numNextSlide: number) {
         this.dotsArray[numNextSlide].classList.add('active-dot');
-    }
-
-    private connectedCallback() {
-        this.drawDots();
-        this.bindEvents();
     }
 }
 
