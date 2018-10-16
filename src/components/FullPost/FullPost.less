@@ -1,0 +1,39 @@
+.full-post-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  margin-top: 30px;
+  .full-post-container {
+    width: 80%;
+  }
+
+  .post {
+    width: 100%;
+    margin: 0 0 0 0;
+    &:hover {
+      outline: none;
+    }
+  }
+
+  .post-container {
+    height: 100vh;
+    .post-text {
+      &:hover {
+        opacity: 1;
+      }
+    }
+    .parent-post-text::after {
+      content: '';
+      background-image: none;
+    }
+  }
+  .post-container .post-title {
+  }
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.full-post-footer {
+  //margin: 0;
+}

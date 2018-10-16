@@ -1,15 +1,19 @@
 class SlideCarousel extends HTMLElement {
+    static get is() {return 'slide-carousel';}
+
     constructor() {
         super();
     }
 
-    get numCurrentSlide(): number {
+    // TODO: activeIndex
+    get activeIndex(): number {
         const activeDot = this.querySelector('.active-dot') as HTMLSpanElement;
         return +activeDot.title - 1;
     }
 
-    get slides(): NodeListOf<HTMLDivElement> {
-        return this.querySelectorAll('[data-slide-item]') as NodeListOf<HTMLDivElement>;
+    get slides(): HTMLElement[] {
+        const els = this.querySelectorAll('[data-slide-item]') as NodeListOf<HTMLDivElement>;
+        return els ? Array.from(els) : [];
     }
 
     public goToSlide(numNextSlide: number) {
@@ -22,26 +26,28 @@ class SlideCarousel extends HTMLElement {
     }
 
     private bindEvents() {
-        this.clickArrows();
+        this.addEventListener('click', (event) => this.onClick(event), false);
     }
 
-    private clickArrows() {
-        this.addEventListener('click', (event: any) => {
-            if (event.target.dataset && event.target.dataset.target) {
-                const numCurrentSlide: number = this.numCurrentSlide;
-                const numNextSlide: number = this.getNumNextSlide(event);
-                this.goToSlide(numNextSlide);
-                this.triggerSlideChange(numCurrentSlide, numNextSlide);
-            }
-        }, false);
+    private onClick(event: MouseEvent) {
+        const target = event.target as HTMLElement;
+        if (target && target.dataset.slideTarget) {
+            // TODO: here we want just to delegate all actions to goToSlide method
+            // triggerEvent is part of any 'goTO'(change) action
+            const numCurrentSlide: number = this.activeIndex;
+            const numNextSlide: number = this.getNumNextSlide(event);
+            this.goToSlide(numNextSlide);
+            this.triggerSlideChange(numCurrentSlide, numNextSlide);
+        }
     }
 
     private getNumNextSlide(event: any): number {
-        const numPrevSlide = this.numCurrentSlide;
+        const numPrevSlide = this.activeIndex;
         let numNextSlide: number = 0;
         switch (event.target.dataset.target) {
             case 'next':
                 numNextSlide = numPrevSlide + 1;
+                // this.currentSlide++;
                 break;
             case 'prev':
                 numNextSlide = numPrevSlide - 1;
@@ -54,7 +60,7 @@ class SlideCarousel extends HTMLElement {
 
 
     private hideCurrentSlide() {
-        this.slides[this.numCurrentSlide].classList.remove('active-slide');
+        this.slides[this.activeIndex].classList.remove('active-slide');
     }
 
     private showNextSlide(numNextSlide: number) {
@@ -73,6 +79,6 @@ class SlideCarousel extends HTMLElement {
     }
 }
 
-customElements.define('slide-carousel', SlideCarousel);
+customElements.define(SlideCarousel.is, SlideCarousel);
 
 export default SlideCarousel;

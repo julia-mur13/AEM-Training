@@ -1,7 +1,10 @@
 <slide-carousel class="carousel-wrapper" id="carousel-1">
-    <button data-target="prev" class="carousel-controls arrow-previous-btn"></button>
+
+    <button data-slide-target="prev" class="carousel-controls arrow-previous-btn"></button>
+
     <div data-slide-area class="carousel-items">
-        <div data-slide-item class="carousel-item carousel-post active-slide">
+
+        <div data-slide-item title="1" class="carousel-item carousel-post active-slide">
             <div class="post-container">
                 <h1 class="post-title">Title1</h1>
                 <div class="parent-post-text">
@@ -21,7 +24,7 @@
             </div>
         </div>
 
-        <div data-slide-item class="carousel-item carousel-post">
+        <div data-slide-item title="2" class="carousel-item carousel-post">
             <div class="post-container">
                 <h1 class="post-title">Title1</h1>
                 <div class="parent-post-text">
@@ -37,7 +40,7 @@
             </div>
         </div>
 
-        <div data-slide-item class="carousel-item carousel-post">
+        <div data-slide-item title="3" class="carousel-item carousel-post">
             <div class="post-container">
                 <h1 class="post-title">Title1</h1>
                 <div class="parent-post-text">
@@ -51,15 +54,12 @@
                 </div>
             </div>
         </div>
+
     </div>
 
 
-    <button data-target="next" class="carousel-controls arrow-next-btn"></button>
+    <button data-slide-target="next" class="carousel-controls arrow-next-btn"></button>
 
-    <slide-carousel-dots class="carousel-dots-wrapper">
-        <!--<span class="carousel-dot active-dot" title="1"></span>-->
-        <!--<span class="carousel-dot" title="2"></span>-->
-        <!--<span class="carousel-dot" title="3"></span>-->
-    </slide-carousel-dots>
+    <slide-carousel-dots class="carousel-dots-wrapper"></slide-carousel-dots>
 </slide-carousel>
 

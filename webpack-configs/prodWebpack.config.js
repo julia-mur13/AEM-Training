@@ -12,7 +12,7 @@ const named = require('vinyl-named');
 module.exports = function () {
     let options = {
         mode: 'production',
-        context: path.join(__dirname, '/../src/components/design1.0/bundle-content'),
+        context: path.join(__dirname, '/../src/components/MainPage/bundle-content'),
         entry: {
             bundle: './bundle',
         },
