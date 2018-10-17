@@ -6,14 +6,15 @@ class SlideCarousel extends HTMLElement {
     }
 
     get activeIndex(): number {
-        const activeSlide = this.querySelector('.active-slide') as HTMLSpanElement;
-        return +activeSlide.title - 1;
+        return this.slides.findIndex((el) => el.classList.contains('active-slide'));
     }
 
     set activeIndex(numNextSlide: number) {
         numNextSlide = (numNextSlide + this.slides.length) % this.slides.length;
+
         this.slides[this.activeIndex].classList.remove('active-slide');
         this.slides[numNextSlide].classList.add('active-slide');
+
         this.triggerSlideChange();
     }
 
@@ -27,10 +28,10 @@ class SlideCarousel extends HTMLElement {
     }
 
     private bindEvents() {
-        this.addEventListener('click', (event) => this.onClick(event), false);
+        this.addEventListener('click', (event) => this._onClick(event), false);
     }
 
-    private onClick(event: MouseEvent) {
+    private _onClick(event: MouseEvent) {
         const target = event.target as HTMLElement;
         if (target && target.dataset.slideTarget) {
             this.setActive(target.dataset.slideTarget);
