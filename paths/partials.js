@@ -9,7 +9,6 @@ module.exports.pathsArray = [
     DIR_COMPONENTS + 'MainPage/Footer',
     DIR_COMPONENTS + 'MainPage/SlideCarousel',
     DIR_COMPONENTS + 'MainPage/Main',
-    DIR_COMPONENTS + 'MainPage/Article',
     DIR_COMPONENTS + 'FullPost',
     DIR_COMPONENTS + 'exercises/Clock',
     DIR_COMPONENTS + 'exercises/AnimationLayers',

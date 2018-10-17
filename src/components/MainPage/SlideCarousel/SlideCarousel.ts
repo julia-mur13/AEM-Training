@@ -5,20 +5,21 @@ class SlideCarousel extends HTMLElement {
         super();
     }
 
-    // TODO: activeIndex
     get activeIndex(): number {
-        const activeDot = this.querySelector('.active-dot') as HTMLSpanElement;
-        return +activeDot.title - 1;
+        const activeSlide = this.querySelector('.active-slide') as HTMLSpanElement;
+        return +activeSlide.title - 1;
+    }
+
+    set activeIndex(numNextSlide: number) {
+        numNextSlide = (numNextSlide + this.slides.length) % this.slides.length;
+        this.slides[this.activeIndex].classList.remove('active-slide');
+        this.slides[numNextSlide].classList.add('active-slide');
+        this.triggerSlideChange();
     }
 
     get slides(): HTMLElement[] {
         const els = this.querySelectorAll('[data-slide-item]') as NodeListOf<HTMLDivElement>;
         return els ? Array.from(els) : [];
-    }
-
-    public goToSlide(numNextSlide: number) {
-        this.hideCurrentSlide();
-        this.showNextSlide(numNextSlide);
     }
 
     private connectedCallback() {
@@ -32,48 +33,23 @@ class SlideCarousel extends HTMLElement {
     private onClick(event: MouseEvent) {
         const target = event.target as HTMLElement;
         if (target && target.dataset.slideTarget) {
-            // TODO: here we want just to delegate all actions to goToSlide method
-            // triggerEvent is part of any 'goTO'(change) action
-            const numCurrentSlide: number = this.activeIndex;
-            const numNextSlide: number = this.getNumNextSlide(event);
-            this.goToSlide(numNextSlide);
-            this.triggerSlideChange(numCurrentSlide, numNextSlide);
+            this.setActive(target.dataset.slideTarget);
         }
     }
 
-    private getNumNextSlide(event: any): number {
-        const numPrevSlide = this.activeIndex;
-        let numNextSlide: number = 0;
-        switch (event.target.dataset.target) {
-            case 'next':
-                numNextSlide = numPrevSlide + 1;
-                // this.currentSlide++;
-                break;
-            case 'prev':
-                numNextSlide = numPrevSlide - 1;
-                break;
-            default:
-                numNextSlide = numPrevSlide;
+    setActive(target: number | string) {
+        if ('prev' === target) {
+            this.activeIndex--;
+        } else if ('next' === target) {
+            this.activeIndex++;
+        } else {
+            this.activeIndex = +target;
         }
-        return (numNextSlide + this.slides.length) % this.slides.length;
     }
 
-
-    private hideCurrentSlide() {
-        this.slides[this.activeIndex].classList.remove('active-slide');
-    }
-
-    private showNextSlide(numNextSlide: number) {
-        this.slides[numNextSlide].classList.add('active-slide');
-    }
-
-    private triggerSlideChange(numCurrentSlide: number, numNextSlide: number) {
+    private triggerSlideChange() {
         const event = new CustomEvent('sc-slidechanged', {
-            bubbles: true,
-            detail: {
-                numCurrentSlide: `${numCurrentSlide}`,
-                numNextSlide: `${numNextSlide}`
-            }
+            bubbles: true
         });
         this.dispatchEvent(event);
     }
