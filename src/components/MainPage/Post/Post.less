@@ -1,8 +1,12 @@
+//@import url('https://fonts.googleapis.com/css?family=HK+Grotesk');
+
 .post {
   width: 27%;
   min-width: 250px;
   background: #ffffff;
   margin: 30px 19/6% 10px 19/6%;
+  outline: 2px solid transparent;
+  transition: outline-offset .5s ease-out, outline .5s ease-out;
   &:hover {
     outline: 2px solid #b0b2b1;
     outline-offset: 5px;
@@ -17,15 +21,11 @@
   align-items: center;
   cursor: pointer;
   word-wrap: break-word;
-  outline: 2px solid transparent;
-  transition: outline-offset .5s ease-out, outline .5s ease-out;
-
   .post-title {
     text-align: center;
-    padding: 30px 15px 15px 15px;
+    margin: 30px 15px 15px 15px;
     color: #000;
     transition: opacity 0.5s;
-
     font-family: "Segoe UI", Arial, sans-serif;
     font-size: 25px;
     font-weight: 400;
@@ -34,6 +34,11 @@
       opacity: 0.7;
     }
   }
+
+  /* .post-img {
+    display: none;
+  }
+  */
 
   .parent-post-text {
     position: relative;
@@ -64,7 +69,9 @@
   }
 
   .read-pull-post {
-    font-family: hk grotesk regular;
+    position: absolute;
+    bottom: 0;
+    font-family: 'hk grotesk regular';
   }
 }
 
