@@ -4,7 +4,7 @@
   "main": "server.js",
   "scripts": {
     "dev": "node server.js || gulp",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prod": "gulp prod"
   },
   "author": "",
   "license": "ISC",
