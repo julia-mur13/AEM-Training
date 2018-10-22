@@ -1,5 +1,5 @@
 class SlideCarousel extends HTMLElement {
-    static get is() {return 'slide-carousel';}
+    static get is() { return 'slide-carousel'; }
 
     constructor() {
         super();
@@ -38,7 +38,7 @@ class SlideCarousel extends HTMLElement {
         }
     }
 
-    setActive(target: number | string) {
+    private setActive(target: number | string) {
         if ('prev' === target) {
             this.activeIndex--;
         } else if ('next' === target) {

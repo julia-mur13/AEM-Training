@@ -10,7 +10,5 @@ module.exports.pathsArray = [
     DIR_COMPONENTS + 'MainPage/SlideCarousel',
     DIR_COMPONENTS + 'MainPage/Main',
     DIR_COMPONENTS + 'FullPost',
-    DIR_COMPONENTS + 'exercises/Clock',
-    DIR_COMPONENTS + 'exercises/AnimationLayers',
     DIR_TEST_PAGES,
 ];
