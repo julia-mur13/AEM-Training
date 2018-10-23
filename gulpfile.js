@@ -67,7 +67,7 @@ function nodemonTask(cb) {
 }
 
 function watch() {
-    gulp.watch(INPUT_BUNDLE + '/*.less', { usePolling: true }, gulp.series(() => styles(paths.OUTPUT_DIR)));
+    gulp.watch([INPUT_BUNDLE + '/*.less', INPUT_BUNDLE + '/*.less'], { usePolling: true }, gulp.series(() => styles(paths.OUTPUT_DIR)));
     gulp.watch(INPUT_BUNDLE + '/*.ts', { usePolling: true }, gulp.series(devWebpackTask));
 }
 
