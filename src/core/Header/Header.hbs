@@ -1,15 +1,14 @@
 <header>
     <div class="header-container">
         <div class="text-logo">LOGO</div>
-        <div class="lang-container">
-            <!--<img class="img-language" src="../../imgs/world.png"/>-->
+        <div class="popup-menu-container">
             <popup-trigger>
-                <button class="text-lang">Lang:</button>
+                <button data-menu-btn class="popup-btn"></button>
             </popup-trigger>
-            <popup-menu class="text-en">
-                <div><a class="lang" href="">en</a></div>
-                <div><a href="">rus</a></div>
-                <div><a href="">en</a></div>
+            <popup-menu class="elements-wrapper">
+                <a data-menu-item="1" class="active-menu-item">en</a>
+                <a data-menu-item="2">rus</a>
+                <a data-menu-item="3">do</a>
             </popup-menu>
         </div>
     </div>

@@ -1,8 +1,5 @@
 const path = require('path');
 const paths = require('../paths/config-paths');
-const INPUT_JS = paths.INPUT_JS;
-const INPUT_BUNDLE = paths.INPUT_BUNDLE;
-const OUTPUT_DIR = paths.OUTPUT_DIR;
 const CONTEXT_PATH = path.join(__dirname, '/../src/components/bundle-content');
 const TS_CONFIG = path.join(__dirname, '../tsconfig.json');
 
@@ -23,7 +20,7 @@ module.exports = function () {
         },
         devtool: 'inline-source-map',
         output: {
-            path: path.join(__dirname, '/', OUTPUT_DIR),
+            path: path.join(__dirname, '/', paths.OUTPUT_DIR),
             filename: '[name].js',
             library: '[name]'
         },
@@ -44,7 +41,7 @@ module.exports = function () {
                 tsconfig: TS_CONFIG
             }),
             new TSLintPlugin({
-                files: [INPUT_BUNDLE + '/*.ts'],
+                files: [paths.INPUT_BUNDLE + '/*.ts'],
                 format: 'codeFrame'
             })
         ],
@@ -52,10 +49,10 @@ module.exports = function () {
             extensions: ['.ts', '.js']
         }
     };
-    return gulp.src(INPUT_JS)
+    return gulp.src(paths.INPUT_JS)
         .pipe(named())
         .pipe(webpackStream(options))
-        .pipe(gulp.dest(OUTPUT_DIR))
+        .pipe(gulp.dest(paths.OUTPUT_DIR))
         .pipe(browserSync.stream())
 };
 
