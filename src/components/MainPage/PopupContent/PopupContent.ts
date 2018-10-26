@@ -7,6 +7,10 @@ class PopupContent extends HTMLElement {
         super();
     }
 
+    public _onShowMenu() {
+        this.classList.toggle('active-menu');
+    }
+
     private connectedCallback() {
         this.addEventListener('click', () => this._onShowMenu());
     }
@@ -16,11 +20,6 @@ class PopupContent extends HTMLElement {
     //
     //     this.addEventListener('click', (event) => this._onUpdate(event));
     // }
-
-    public _onShowMenu() {
-        this.classList.toggle('active-menu');
-    }
-
 
     // get activeIndex() {
     //     return this.menuItems.findIndex((el) => el.classList.contains('active-menu-item'));
