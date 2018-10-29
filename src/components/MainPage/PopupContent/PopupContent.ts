@@ -3,51 +3,24 @@ class PopupContent extends HTMLElement {
         return 'popup-content';
     }
 
+
     constructor() {
         super();
     }
 
-    public _onShowMenu() {
-        this.classList.toggle('active-menu');
+    get btn(): HTMLElement {
+        return this.previousElementSibling.querySelector('[data-popup-btn]') as HTMLElement;
+    }
+
+    public _onShowLang(event: MouseEvent) {
+        const target = event.target as HTMLElement;
+        const btnText = 'Lang: ' + target.innerText;
+        this.btn.textContent = btnText;
     }
 
     private connectedCallback() {
-        this.addEventListener('click', () => this._onShowMenu());
+        this.addEventListener('click', (event) => this._onShowLang(event));
     }
-
-    // private bindEvents() {
-    //     this._btn = this.closest('popup-trigger');
-    //
-    //     this.addEventListener('click', (event) => this._onUpdate(event));
-    // }
-
-    // get activeIndex() {
-    //     return this.menuItems.findIndex((el) => el.classList.contains('active-menu-item'));
-    // }
-    //
-    // set activeIndex(value: number) {
-    //     this.menuItems[this.activeIndex].classList.remove('active-menu-item');
-    //     this.menuItems[value].classList.add('active-menu-item');
-    //     this.btn.rerender(this.menuItems[value].innerText);
-    // }
-    //
-    // get menuItems(): HTMLElement[] {
-    //     const els = this.querySelectorAll('[data-menu-item]') as NodeListOf<HTMLDivElement>;
-    //     return els ? Array.from(els) : [];
-    // }
-    //
-
-    //
-
-    //
-    // private _onUpdate(event: MouseEvent) {
-    //     const target = event.target as HTMLElement;
-    //     const nextIndex = +target.dataset.menuItem - 1;
-    //     if (this.activeIndex !== nextIndex) {
-    //         this.activeIndex = nextIndex;
-    //     }
-    //     this._onShowMenu();
-    // }
 }
 
 customElements.define(PopupContent.is, PopupContent);
