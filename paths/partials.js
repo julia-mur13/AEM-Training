@@ -12,5 +12,6 @@ module.exports.pathsArray = [
     DIR_CORE + 'Header',
     DIR_CORE + 'Footer',
     DIR_CORE + 'PopupMenu',
+    DIR_CORE + 'svg',
     DIR_TEST_PAGES,
 ];

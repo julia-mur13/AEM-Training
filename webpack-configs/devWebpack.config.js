@@ -17,6 +17,7 @@ module.exports = function () {
         context: CONTEXT_PATH,
         entry: {
             bundle: './bundle.ts',
+            polyfill: './polyfill.ts',
         },
         devtool: 'inline-source-map',
         output: {

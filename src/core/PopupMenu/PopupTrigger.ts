@@ -5,25 +5,45 @@ class PopupTrigger extends HTMLElement {
         return 'popup-trigger';
     }
 
-    get btn(): HTMLButtonElement{
+    get btn(): HTMLButtonElement {
         return this.querySelector('[data-popup-btn]') as HTMLButtonElement;
+    }
+
+    get popup(): PopupMenu {
+        return this.nextElementSibling as PopupMenu;
     }
 
     constructor() {
         super();
+        this._onActivate = this._onActivate.bind(this);
     }
 
     private connectedCallback() {
-        this.addEventListener('click', () => this.triggerShowMenu(), false);
-        // this.btn.addEventListener('blur', () => this.triggerShowMenu(), false);
+        this._attachEvent();
     }
 
+    private disconnectedCallback() {
+        this._detachEvent();
+    }
 
-    private triggerShowMenu() {
-        const event = new CustomEvent('pm-showmenu', {
-            bubbles: true
-        });
-        this.dispatchEvent(event);
+    get triggerOn() {
+        return this.getAttribute('triggeron') || 'click';
+    }
+
+    private _attachEvent() {
+        if (this.triggerOn === 'click') {
+            this.addEventListener('click', this._onActivate, false);
+        } else {
+
+        }
+    }
+
+    private _detachEvent() {
+        this.removeEventListener('click', this._onActivate);
+    }
+
+    private _onActivate() {
+        this.popup.triggerMenu()
     }
 }
 

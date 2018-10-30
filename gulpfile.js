@@ -13,7 +13,7 @@ const minifyCss = require('gulp-clean-css');
 const gzip = require('gulp-gzip');
 const sourcemaps = require('gulp-sourcemaps');
 const clean = require('gulp-clean');
-
+const tslint = require('gulp-tslint');
 
 const nodemon = require('gulp-nodemon');
 const browserSync = require('browser-sync').create();
@@ -31,7 +31,6 @@ function styles(outputDir) {
         .pipe(gzip())
         .pipe(gulp.dest(outputDir));
 }
-
 
 function cleanTask(outputDir) {
     return gulp.src(outputDir, { read: false, allowEmpty: true })

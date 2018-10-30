@@ -7,12 +7,21 @@ class PopupMenu extends HTMLElement {
         super();
     }
 
-    private connectedCallback() {
-        this.addEventListener('pm-showmenu', () => this._onShowMenu());
+    get activeClass() {
+        return this.getAttribute('active-class') || 'active-menu';
     }
 
-    public _onShowMenu() {
-        this.classList.toggle('active-menu');
+    set active(value: boolean) {
+        value ? this.classList.add(this.activeClass) : this.classList.remove(this.activeClass);
+        this.setAttribute('aria-hidden', String(!value));
+    }
+
+    get active(): boolean {
+        return this.classList.contains(this.activeClass);
+    }
+
+    public triggerMenu() {
+        this.active = !this.active;
     }
 }
 
