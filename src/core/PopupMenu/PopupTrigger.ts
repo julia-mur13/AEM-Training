@@ -34,7 +34,7 @@ class PopupTrigger extends HTMLElement {
         if (this.triggerOn === 'click') {
             this.addEventListener('click', this._onActivate, false);
         } else {
-
+            this.addEventListener('click', this._onActivate, false);
         }
     }
 

@@ -13,7 +13,6 @@ const minifyCss = require('gulp-clean-css');
 const gzip = require('gulp-gzip');
 const sourcemaps = require('gulp-sourcemaps');
 const clean = require('gulp-clean');
-const tslint = require('gulp-tslint');
 
 const nodemon = require('gulp-nodemon');
 const browserSync = require('browser-sync').create();
@@ -45,6 +44,12 @@ function browserSyncTask() {
     });
 }
 
+function attachJCRIdentifier(){
+    return gulp.src('aem-build/.content.xml')
+        .pipe(gulp.dest(paths.OUTPUT_DIR_PROD));
+
+}
+
 function nodemonTask(cb) {
     let started = false;
     return nodemon({
@@ -70,7 +75,7 @@ function watch() {
 }
 
 gulp.task('devBuild', gulp.series(() => cleanTask(paths.OUTPUT_DIR), gulp.parallel(() => styles(paths.OUTPUT_DIR), devWebpackTask)));
-gulp.task('prodBuild', gulp.series(() => cleanTask(paths.OUTPUT_DIR_PROD), gulp.parallel(() => styles(paths.OUTPUT_DIR_PROD), prodWebpackTask)));
+gulp.task('prodBuild', gulp.series(() => cleanTask(paths.OUTPUT_DIR_PROD), attachJCRIdentifier, gulp.parallel(() => styles(paths.OUTPUT_DIR_PROD), prodWebpackTask)));
 
 gulp.task('devWebpackTask', devWebpackTask);
 gulp.task('default',

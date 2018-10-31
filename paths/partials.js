@@ -8,6 +8,7 @@ module.exports.pathsArray = [
     DIR_COMPONENTS + 'MainPage/Post',
     DIR_COMPONENTS + 'MainPage/SlideCarousel',
     DIR_COMPONENTS + 'MainPage/Main',
+    DIR_COMPONENTS + 'MainPage/PopupMenu',
     DIR_COMPONENTS + 'FullPost',
     DIR_CORE + 'Header',
     DIR_CORE + 'Footer',
