@@ -1,32 +1,35 @@
 <slide-carousel class="carousel-wrapper" id="carousel-1">
 
     <button data-slide-target="prev" class="carousel-controls arrow-previous-btn">
-      {{> arrow class="svg-arrow" attribute="data-slide-target" value="prev"}}
+        {{> arrow class="svg-arrow" attribute="data-slide-target" value="prev"}}
     </button>
 
     <div data-slide-area class="carousel-items">
 
-        <div data-slide-item class="carousel-item carousel-post active-slide">
-            <div class="post-container">
-                <h1 class="post-title">Title1</h1>
-                <div class="parent-post-text">
-                    <p class="post-text">
-                        1
-                        TypeScript starts from the same syntax and semantics that millions
-                        of JavaScript developers know today. Use existing JavaScript code,
-                        incorporate popular JavaScript libraries, and call TypeScript code from JavaScript.
+        <a href="TestPage.html">
+            <div data-slide-item class="carousel-item carousel-post active-slide">
+                <div class="post-container">
+                    <h1 class="post-title">Title1</h1>
+                    <div class="parent-post-text">
+                        <p class="post-text">
+                            1
+                            TypeScript starts from the same syntax and semantics that millions
+                            of JavaScript developers know today. Use existing JavaScript code,
+                            incorporate popular JavaScript libraries, and call TypeScript code from JavaScript.
 
-                        TypeScript compiles to clean,
-                        simple JavaScript code which runs on any browser,
-                        in Node.js, or in any JavaScript engine that supports ECMAScript 3 (or newer).
-                        Types enable JavaScript developers to use highly-productive development tools
-                        and practices like static checking and code refactoring when developing JavaScript applications.
-                    </p>
+                            TypeScript compiles to clean,
+                            simple JavaScript code which runs on any browser,
+                            in Node.js, or in any JavaScript engine that supports ECMAScript 3 (or newer).
+                            Types enable JavaScript developers to use highly-productive development tools
+                            and practices like static checking and code refactoring when developing JavaScript
+                            applications.
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
 
-        <div data-slide-item class="carousel-item carousel-post">
+        <div data-slide-item class="carousel-item carousel-post" onclick="location.href='TestPage.html';">
             <div class="post-container">
                 <h1 class="post-title">Title1</h1>
                 <div class="parent-post-text">
@@ -42,7 +45,7 @@
             </div>
         </div>
 
-        <div data-slide-item class="carousel-item carousel-post">
+        <div data-slide-item class="carousel-item carousel-post" onclick="location.href='TestPage.html';">
             <div class="post-container">
                 <h1 class="post-title">Title1</h1>
                 <div class="parent-post-text">

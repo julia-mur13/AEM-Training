@@ -93,18 +93,19 @@
   .post-container .post-title {
     font-family: 'Playfair Display Regular', serif;
     font-size: 35px;
-    margin: 70px 0 30px 0;
+    margin: 70px 0 0 0;
     letter-spacing: 0.1em;
     &:hover {
       opacity: 1;
     }
-    &::after {
-      content: 'Декабрь 28, 2017';
-      display: block;
-      margin: 20px 0 10px 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      font-size: 10px;
-    }
+  }
+
+  .post-container .post-date {
+    display: block;
+    margin: 20px 0 40px 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: .35em;
   }
 
   .post-container .parent-post-text {
@@ -118,6 +119,11 @@
       opacity: 1;
     }
   }
+}
+
+.full-post-container .post .post-link {
+  pointer-events: none;
+  cursor: default;
 }
 
 @media screen and (max-width: 1800px) and (min-width: 1500px) {
