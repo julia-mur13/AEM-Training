@@ -6,7 +6,6 @@ const gzip = require('gulp-gzip');
 const webpackStream = require('webpack-stream');
 const named = require('vinyl-named');
 
-
 module.exports = function () {
     let options = {
         mode: 'production',
