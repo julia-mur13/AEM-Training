@@ -39,7 +39,11 @@ class PopupTrigger extends HTMLElement {
     }
 
     private _detachEvent() {
-        this.removeEventListener('click', this._onActivate);
+        if (this.triggerOn === 'click') {
+            this.removeEventListener('click', this._onActivate);
+        } else {
+            this.removeEventListener(this.triggerOn, this._onActivate);
+        }
     }
 
     private _onActivate() {

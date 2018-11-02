@@ -1,5 +1,4 @@
 import PopupTrigger from "../../../core/PopupMenu/PopupTrigger";
-import PopupMenu from "../../../core/PopupMenu/PopupMenu";
 
 class DropdownInput extends PopupTrigger {
     static get is() {
@@ -23,19 +22,17 @@ class DropdownInput extends PopupTrigger {
         if (this.active !== value) {
             this.menuArr[this.active].classList.remove('active-menu-item');
             this.menuArr[value].classList.add('active-menu-item');
-            this.btn.innerHTML =  `Lang: ${this.menuArr[value].innerText}`;
+            this.btn.innerHTML = `Lang: ${this.menuArr[value].innerText}`;
         }
     }
 
     public connectedCallback() {
         super.connectedCallback();
-        this.popup.addEventListener('click', (event) => this._onChange(event));
     }
 
-    private _onChange(event: MouseEvent) {
+    public triggerInput(event: MouseEvent) {
         const target = event.target as HTMLElement;
         this.active = +target.dataset.menuItem - 1;
-        this.popup.triggerMenu();
     }
 }
 
