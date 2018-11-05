@@ -18,25 +18,23 @@ class DropdownInput extends PopupTrigger {
         return this.menuArr.findIndex((el) => el.classList.contains('active-menu-item'));
     }
 
-    set active(value: number) {
-        if (this.active !== value) {
-            this.menuArr[this.active].classList.remove('active-menu-item');
-            this.menuArr[value].classList.add('active-menu-item');
-            this.btn.innerHTML = `Lang: ${this.menuArr[value].innerText}`;
-        }
+    set active(index: number) {
+        this.menuArr[this.active].classList.remove('active-menu-item');
+        this.menuArr[index].classList.add('active-menu-item');
+        this.btn.innerHTML = `Lang: ${this.menuArr[index].innerText}`;
     }
 
     public connectedCallback() {
         super.connectedCallback();
     }
 
-    public triggerInput(event: MouseEvent) {
-        const target = event.target as HTMLElement;
-        this.active = +target.dataset.menuItem - 1;
+    public triggerInput(index: number) {
+        if (this.active !== index) {
+            this.active = index;
+        }
     }
 }
 
 customElements.define(DropdownInput.is, DropdownInput);
-
 
 export default DropdownInput;
