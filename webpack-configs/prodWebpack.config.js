@@ -11,7 +11,8 @@ module.exports = function () {
         mode: 'production',
         context: path.join(__dirname, '/../src/components/bundle-content'),
         entry: {
-            bundle: './bundle',
+            bundle: './bundle.ts',
+            polyfill: './polyfill.ts',
         },
         output: {
             path: path.join(__dirname + '/' + paths.OUTPUT_DIR),

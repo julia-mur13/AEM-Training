@@ -10,17 +10,32 @@ class DropdownMenu extends PopupMenu {
         super();
     }
 
-    get input(): DropdownInput {
-        return this.previousElementSibling as DropdownInput;
-    }
-
     public connectedCallback() {
         this.addEventListener('click', (event) => this._onChange(event));
     }
 
+    get input(): DropdownInput {
+        return document.getElementById('dropdown-input') as DropdownInput;
+    }
+
+    get activeIndex(): number {
+        return this.menuArr.findIndex((els) => els.classList.contains('active-menu-item'));
+    }
+
+    set activeIndex(index: number) {
+        this.menuArr[this.activeIndex].classList.remove('active-menu-item');
+        this.menuArr[index].classList.add('active-menu-item');
+    }
+
+    get menuArr(): HTMLElement[] {
+        const els = this.querySelectorAll('[data-menu-item]') as NodeListOf<HTMLElement>;
+        return els ? Array.from(els) : [];
+    }
+
     private _onChange(event: MouseEvent) {
         const target = event.target as HTMLElement;
-        this.input.triggerInput(+target.dataset.menuItem - 1);
+        this.input.triggerInput(target.textContent);
+        this.activeIndex = +target.dataset.menuItem - 1;
         this.triggerMenu();
     }
 }

@@ -9,28 +9,21 @@ class DropdownInput extends PopupTrigger {
         super();
     }
 
-    get menuArr(): HTMLElement[] {
-        const els = this.popup.querySelectorAll('[data-menu-item]') as NodeListOf<HTMLElement>;
-        return els ? Array.from(els) : [];
+    get value(): string {
+        return this.textContent;
     }
 
-    get active(): number {
-        return this.menuArr.findIndex((el) => el.classList.contains('active-menu-item'));
-    }
-
-    set active(index: number) {
-        this.menuArr[this.active].classList.remove('active-menu-item');
-        this.menuArr[index].classList.add('active-menu-item');
-        this.btn.innerHTML = `Lang: ${this.menuArr[index].innerText}`;
+    set value(value: string) {
+        this.btn.innerText = this.dataset.inputValue.replace('$', value);
     }
 
     public connectedCallback() {
         super.connectedCallback();
     }
 
-    public triggerInput(index: number) {
-        if (this.active !== index) {
-            this.active = index;
+    public triggerInput(value: string) {
+        if (this.value !== value) {
+            this.value = value;
         }
     }
 }
