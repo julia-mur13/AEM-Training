@@ -1,4 +1,6 @@
-module.exports.INPUT_BUNDLE = 'src/components/**';
+module.exports.INPUT_BUNDLE = 'src/bundles';
+module.exports.SRC_DIR = 'src/components';
+
 module.exports.INPUT_CORE = 'src/core/**';
 module.exports.INPUT_DIRS  = 'front-end/**';
 module.exports.INPUT_JS = 'src/components/**/**/*.js';

@@ -1,6 +1,6 @@
 const path = require('path');
 const paths = require('../paths/config-paths');
-const CONTEXT_PATH = path.join(__dirname, '/../src/components/bundle-content');
+const CONTEXT_PATH = path.join(__dirname, '/../src/bundles');
 const TS_CONFIG = path.join(__dirname, '../tsconfig.json');
 
 const gulp = require('gulp');
@@ -42,7 +42,7 @@ module.exports = function () {
                 tsconfig: TS_CONFIG
             }),
             new TSLintPlugin({
-                files: [paths.INPUT_BUNDLE + '/*.ts'],
+                files: [paths.SRC_DIR + '/*.ts'],
                 format: 'codeFrame'
             })
         ],
@@ -54,6 +54,6 @@ module.exports = function () {
         .pipe(named())
         .pipe(webpackStream(options))
         .pipe(gulp.dest(paths.OUTPUT_DIR))
-        .pipe(browserSync.stream())
+        .pipe(browserSync.stream());
 };
 

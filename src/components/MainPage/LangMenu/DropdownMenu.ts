@@ -1,4 +1,4 @@
-import PopupMenu from "../../../core/PopupMenu/PopupMenu";
+import PopupMenu from "../../core/PopupMenu/PopupMenu";
 import DropdownInput from "./DropdownInput";
 
 class DropdownMenu extends PopupMenu {

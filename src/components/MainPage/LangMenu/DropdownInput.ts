@@ -1,4 +1,4 @@
-import PopupTrigger from "../../../core/PopupMenu/PopupTrigger";
+import PopupTrigger from "../../core/PopupMenu/PopupTrigger";
 
 class DropdownInput extends PopupTrigger {
     static get is() {
