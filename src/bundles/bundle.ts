@@ -1,11 +1,11 @@
-import '../components/core/PopupMenu/PopupMenu';
-import '../components/core/PopupMenu/PopupTrigger';
-import '../components/core/SlideCarousel/SlideCarousel';
-import '../components/core/SlideCarousel/SlideCarouselDots';
-import '../components/MainPage/LangMenu/DropdownInput';
-import '../components/MainPage/LangMenu/DropdownMenu';
+import '../components/core/popup-menu/popup-menu';
+import '../components/core/popup-menu/popup-trigger';
+import '../components/core/slide-carousel/slide-carousel';
+import '../components/core/slide-carousel/slide-carousel-dots';
+import '../components/core/dropdown-menu/dropdown-input';
+import '../components/core/dropdown-menu/dropdown-menu';
 
-import VideoPopup from '../components/MainPage/VideoPopup/VideoPopup';
+import VideoPopup from '../components/main-page/video-overlay/video-overlay';
 
 const COMPONENTS_LIST = [
     VideoPopup

@@ -1,0 +1,38 @@
+.popup-trigger button {
+  background-color: black;
+  height: 70px;
+  padding: 0 50px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  &:hover {
+    color: rgba(255, 255, 255, .7);
+  }
+}
+
+[active-menu-item] {
+  background-color: rgba(0, 0, 0, .1)
+}
+
+.dropdown-input {
+  position: relative;
+  display: inline-block;
+}
+
+.popup-menu {
+  display: none;
+  position: absolute;
+  min-width: 150px;
+  z-index: 5;
+  background-color: #fff;
+  color: #000;
+}
+
+.popup-menu:hover .popup-menu {
+  display: block;
+}
+
+.popup-menu.active-menu {
+  display: block;
+}

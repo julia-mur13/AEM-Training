@@ -57,7 +57,7 @@ function browserSyncTask() {
 }
 
 function attachJCRIdentifier(){
-    return gulp.src('aem-build/.content.xml')
+    return gulp.src(paths.AEM_DIR + '/.content.xml')
         .pipe(gulp.dest(paths.OUTPUT_DIR_PROD));
 
 }
@@ -82,8 +82,8 @@ function nodemonTask(cb) {
 }
 
 function watch() {
-    gulp.watch([paths.SRC_DIR + '/*.less'], { usePolling: true }, gulp.series(() => styles(paths.OUTPUT_DIR)));
-    gulp.watch([paths.SRC_DIR +  '/*.ts'], { usePolling: true }, gulp.series(devWebpackTask));
+    gulp.watch([paths.SRC_DIR + '/**/**/*.less'], { usePolling: true }, gulp.series(() => styles(paths.OUTPUT_DIR)));
+    gulp.watch([paths.SRC_DIR +  '/**/**/*.ts'], { usePolling: true }, gulp.series(devWebpackTask));
 }
 
 gulp.task('devBuild', gulp.series(() => cleanTask(paths.OUTPUT_DIR), gulp.parallel(() => styles(paths.OUTPUT_DIR), devWebpackTask)));

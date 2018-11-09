@@ -2,7 +2,10 @@ const path = require('path');
 const paths = require('../paths/config-paths');
 
 const gulp = require('gulp');
+
 const webpackStream = require('webpack-stream');
+
+// UTILS
 const named = require('vinyl-named');
 
 module.exports = function () {
@@ -38,4 +41,3 @@ module.exports = function () {
         .pipe(webpackStream(options))
         .pipe(gulp.dest(paths.OUTPUT_DIR_PROD));
 };
-
