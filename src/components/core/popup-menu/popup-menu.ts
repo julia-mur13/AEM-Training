@@ -11,11 +11,16 @@ class PopupMenu extends HTMLElement {
         this.classList.add('popup-menu');
     }
 
+    get type() {
+        return this.getAttribute('type') || 'non-modal';
+    }
+
     get activeClass() {
         return this.getAttribute('active-class') || 'active-menu';
     }
 
     set active(value: boolean) {
+        this.type === 'modal'? this.classList.toggle('modal-popup') : null;
         value ? this.classList.add(this.activeClass) : this.classList.remove(this.activeClass);
         this.setAttribute('aria-hidden', String(!value));
     }

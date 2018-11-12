@@ -10,7 +10,8 @@ class PopupTrigger extends HTMLElement {
     }
 
     get popup(): PopupMenu {
-        return document.getElementById('popup-menu') as PopupMenu;
+        const targetId = this.getAttribute('target');
+        return document.getElementById(targetId) as PopupMenu;
     }
 
     constructor() {

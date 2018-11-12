@@ -9,6 +9,7 @@ module.exports.pathsArray = [
     DIR_COMPONENTS + 'main-page/dynamic-card',
     DIR_COMPONENTS + 'main-page/main',
     DIR_COMPONENTS + 'main-page/lang-menu',
+    DIR_COMPONENTS + 'main-page/video-overlay',
     DIR_COMPONENTS + 'full-post',
     DIR_CORE + 'header',
     DIR_CORE + 'footer',
