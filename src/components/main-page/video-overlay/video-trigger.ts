@@ -35,7 +35,7 @@ class VideoTrigger {
             this._service.insertVideo(attrValue);
         }
         this.hideBtn.removeEventListener('click', () => this._service._popup.triggerMenu());
-        this.hideBtn.addEventListener('click', () => );
+        // this.hideBtn.addEventListener('click', () => );
     }
 }
 
