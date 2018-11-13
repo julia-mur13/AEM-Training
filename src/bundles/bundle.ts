@@ -5,7 +5,7 @@ import '../components/core/slide-carousel/slide-carousel-dots';
 import '../components/core/dropdown-menu/dropdown-input';
 import '../components/core/dropdown-menu/dropdown-menu';
 
-import VideoOverlay from '../components/main-page/video-overlay/video-overlay';
+// import VideoOverlay from '../components/main-page/video-overlay/video-overlay';
 import VideoTrigger from '../components/main-page/video-overlay/video-trigger';
 
 

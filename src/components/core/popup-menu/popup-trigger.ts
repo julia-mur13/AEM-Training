@@ -16,11 +16,11 @@ class PopupTrigger extends HTMLElement {
 
     constructor() {
         super();
-        this.classList.add('popup-trigger');
         this._onActivate = this._onActivate.bind(this);
     }
 
     public connectedCallback() {
+        this.classList.add('popup-trigger');
         this._attachEvent();
     }
 
