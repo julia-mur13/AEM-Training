@@ -5,16 +5,20 @@ import '../components/core/slide-carousel/slide-carousel-dots';
 import '../components/core/dropdown-menu/dropdown-input';
 import '../components/core/dropdown-menu/dropdown-menu';
 
-// import VideoOverlay from '../components/main-page/video-overlay/video-overlay';
-import VideoTrigger from '../components/main-page/video-overlay/video-trigger';
+import VideoService from '../components/core/video-overlay/video-service';
+import VideoTrigger from '../components/core/video-overlay/video-trigger';
+import VideoOverlay from "../components/main-page/video-overlay/video-overlay";
+
 
 
 const COMPONENTS_LIST = [
-    VideoTrigger
+    VideoService,
+    VideoOverlay
 ];
 
 COMPONENTS_LIST.forEach((Component) => {
     const component = new Component();
-   // (typeof component.init === 'function') && component.init();
-    component.init();
 });
+
+const links = document.querySelectorAll('.post a[href*="youtube"]');
+links.forEach((link: HTMLElement) => new VideoTrigger(link));

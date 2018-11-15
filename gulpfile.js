@@ -65,7 +65,8 @@ function attachJCRIdentifier(){
 function nodemonTask(cb) {
     let started = false;
     return nodemon({
-        script: 'server.js'
+        script: 'server.js',
+        ext: 'js hbs'
     }).on('start', function () {
         if (!started) {
             cb();
@@ -82,8 +83,8 @@ function nodemonTask(cb) {
 }
 
 function watch() {
-    gulp.watch([paths.SRC_DIR + '/**/**/*.less'], { usePolling: true }, gulp.series(() => styles(paths.OUTPUT_DIR)));
-    gulp.watch([paths.SRC_DIR +  '/**/**/*.ts'], { usePolling: true }, gulp.series(devWebpackTask));
+    gulp.watch([paths.SRC_DIR + '/**/*.less', paths.INPUT_BUNDLE + '/*.less'], { usePolling: true }, gulp.series(() => styles(paths.OUTPUT_DIR)));
+    gulp.watch([paths.SRC_DIR +  '/**/*.ts', paths.INPUT_BUNDLE + '/*.ts'], { usePolling: true }, gulp.series(devWebpackTask));
 }
 
 gulp.task('devBuild', gulp.series(() => cleanTask(paths.OUTPUT_DIR), gulp.parallel(() => styles(paths.OUTPUT_DIR), devWebpackTask)));

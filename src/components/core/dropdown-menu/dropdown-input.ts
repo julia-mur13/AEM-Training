@@ -10,7 +10,8 @@ class DropdownInput extends PopupTrigger {
     }
 
     get value(): string {
-        return this.textContent;
+        const inputCustomValue = this.dataset.inputValue.replace('$', "")
+        return this.innerText.replace(inputCustomValue, "");
     }
 
     set value(value: string) {
