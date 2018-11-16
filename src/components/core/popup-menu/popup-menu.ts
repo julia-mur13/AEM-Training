@@ -20,13 +20,26 @@ class PopupMenu extends HTMLElement {
     }
 
     set active(value: boolean) {
-        this.type === 'modal'? this.classList.toggle('modal-popup') : null;
+        this.type === 'modal' ? this.classList.toggle('modal-popup') : null;
         value ? this.classList.add(this.activeClass) : this.classList.remove(this.activeClass);
         this.setAttribute('aria-hidden', String(!value));
     }
 
     get active(): boolean {
         return this.classList.contains(this.activeClass);
+    }
+
+    public hide() {
+        if (this.active) {
+            this.triggerMenu();
+        }
+
+    }
+
+    public show() {
+        if (!this.active) {
+            this.triggerMenu();
+        }
     }
 
     public triggerMenu() {

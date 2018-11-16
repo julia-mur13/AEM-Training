@@ -9,9 +9,13 @@ class DropdownInput extends PopupTrigger {
         super();
     }
 
+    get defaultValue(): string {
+        return this.dataset.defaultValue;
+    }
+
     get value(): string {
-        const inputCustomValue = this.dataset.inputValue.replace('$', "")
-        return this.innerText.replace(inputCustomValue, "");
+        const customInputValue = this.dataset.inputValue.replace('$', "");
+        return this.innerText.replace(customInputValue, "");
     }
 
     set value(value: string) {
@@ -20,6 +24,7 @@ class DropdownInput extends PopupTrigger {
 
     public connectedCallback() {
         this.classList.add('dropdown-input');
+        this.value = this.defaultValue;
         super.connectedCallback();
     }
 

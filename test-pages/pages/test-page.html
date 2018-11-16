@@ -8,13 +8,11 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-{{> header}}
+{{{include 'header'}}}
 <main>
-    {{> full-post}}
+    {{{include 'full-post'}}}
 </main>
-<footer class="full-post-footer">
-    {{> footer}}
-</footer>
+{{{include 'footer'}}}
 <script src="bundle.js"></script>
 </body>
 </html>

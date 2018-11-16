@@ -34,7 +34,7 @@ class VideoService {
     private show() {
         if (this._popup && !this._popup.active) {
             this.iframe.src = this._url;
-            this._popup.triggerMenu();
+            this._popup.show();
         }
     }
 
@@ -49,7 +49,7 @@ class VideoService {
     private hide() {
         if (this._popup && this._popup.active) {
             this.iframe.src = "";
-            this._popup.triggerMenu();
+            this._popup.hide();
         }
     }
 

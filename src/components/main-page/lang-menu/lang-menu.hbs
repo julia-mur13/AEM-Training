@@ -1,12 +1,14 @@
 <div class="popup-menu-container">
-    <dropdown-input target="dropdown-menu" data-input-value="Lang: $" id="dropdown-input" class="trigger-wrapper">
-        <button data-popup-btn="1" class="popup-btn">Lang: en</button>
+    <dropdown-input target="dropdown-menu" data-default-value="{{var2.defaultValue}}" data-input-value="{{var2.inputValue}}" id="dropdown-input"
+                    class="trigger-wrapper">
+        <button data-popup-btn="1" class="popup-btn"></button>
     </dropdown-input>
     <dropdown-menu id="dropdown-menu" data-popup-content class="elements-wrapper">
         <ul>
-            <li><a href="javascript: void 0" data-menu-item="1" active-menu-item>en</a></li>
-            <li><a href="javascript: void 0" data-menu-item="2">rus</a></li>
-            <li><a href="javascript: void 0" data-menu-item="3">do</a></li>
+            {{#each var2.els}}
+                <li><a href="javascript: void 0" data-menu-item="{{id}}"
+                       {{#if active}}active-menu-item{{/if}}>{{item}}</a></li>
+            {{/each}}
         </ul>
     </dropdown-menu>
 </div>
