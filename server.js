@@ -16,22 +16,26 @@ const hbs = exphbs.create({
 const handlebars = hbs.handlebars;
 hbswax(handlebars)
     .partials('src/components/**/*.hbs', {
-        parsePartialName: function(options, file) {
+        parsePartialName: function (options, file) {
             const name = /\\([^\\]+)\.hbs$/.exec(file.path)[1];
             file.exports.path = file.path;
             return name;
         }
     });
 
-handlebars.registerHelper('include', function (name) {
+handlebars.registerHelper('include', function (name, options) {
     const partial = handlebars.partials[name];
 
     const dataPath = partial.path.replace(/\\([^\\]+)$/, '\\data.json');
     let context = {};
 
+    let field = null;
+    if (options && options.hash.var) { field = options.hash.var; }
+
     try {
         const content = fs.readFileSync(dataPath);
         context = JSON.parse(content);
+        if (field) { context.var = context[field]; }
     } catch (e) {
         console.error(e);
     }
@@ -60,7 +64,7 @@ function renderDir(res, pathDir, fsPath) {
         }
     });
     fileNames.splice(indexRenderDir, 1);
-    const links =  fileNames.map((fn) => ({
+    const links = fileNames.map((fn) => ({
         name: fn,
         link: path.join(pathDir, fn)
     }));

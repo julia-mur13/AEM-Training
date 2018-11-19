@@ -1,17 +1,17 @@
 <div class="full-post-wrapper">
     <div class="img-container">
-        <img class="post-img" src="{{var1.img}}"/>
+        <img class="post-img" src="{{var.img}}"/>
     </div>
     <div class="full-post-container">
-        {{{include 'post'}}}
+        {{{include 'post' var='var1'}}}
         <div class="post-line"></div>
         <ul class="group-nav-btn">
             <li>
-                <div class="prev-btn">Назад</div>
+                <a href="full-page.html" class="prev-btn">Назад</a>
             </li>
             <li class="paging-separator">|</li>
             <li>
-                <div class="next-btn">Вперед</div>
+                <a href="full-page.html" class="next-btn">Вперед</a>
             </li>
         </ul>
     </div>

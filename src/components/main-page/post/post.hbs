@@ -1,13 +1,13 @@
 <article class="post">
-    <a class="post-link" href="test-page.html">
+    <a class="post-link" href="full-page.html">
         <div class="post-container">
 
-            <h1 class="post-title">{{var1.title}}</h1>
-            <span class="post-date">{{var1.date}}</span>
+            <h1 class="post-title">{{var.title}}</h1>
+            <span class="post-date">{{var.date}}</span>
 
             <div class="parent-post-text">
-                <object><a href="https://www.youtube.com/embed/xFa2_PVMeDQ">{{var1.link}}</a></object>
-                {{#each var1.text}}
+                <object><a href="https://www.youtube.com/embed/xFa2_PVMeDQ">{{var.link}}</a></object>
+                {{#each var.text}}
                 <p>
                     {{this}}
                 </p>

@@ -28,23 +28,6 @@ class PopupMenu extends HTMLElement {
     get active(): boolean {
         return this.classList.contains(this.activeClass);
     }
-
-    public hide() {
-        if (this.active) {
-            this.triggerMenu();
-        }
-
-    }
-
-    public show() {
-        if (!this.active) {
-            this.triggerMenu();
-        }
-    }
-
-    public triggerMenu() {
-        this.active = !this.active;
-    }
 }
 
 customElements.define(PopupMenu.is, PopupMenu);

@@ -49,7 +49,7 @@ class PopupTrigger extends HTMLElement {
     }
 
     private _onActivate() {
-        this.popup.triggerMenu()
+        this.popup.active = !this.popup.active;
     }
 }
 

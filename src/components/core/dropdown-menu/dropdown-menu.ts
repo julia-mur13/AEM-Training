@@ -42,7 +42,7 @@ class DropdownMenu extends PopupMenu {
         const target = event.target as HTMLElement;
         this.input.triggerInput(target.textContent);
         this.activeIndex = +target.dataset.menuItem - 1;
-        this.triggerMenu();
+        this.active = !this.active;
         if (!this.active) {
             (this.activeItm) && this.activeItm.focus();
         }
