@@ -1,5 +1,7 @@
 class SlideCarousel extends HTMLElement {
-    static get is() { return 'slide-carousel'; }
+    static get is() {
+        return 'slide-carousel';
+    }
 
     constructor() {
         super();
@@ -11,7 +13,6 @@ class SlideCarousel extends HTMLElement {
 
     set activeIndex(numNextSlide: number) {
         numNextSlide = (numNextSlide + this.slides.length) % this.slides.length;
-
         this.slides[this.activeIndex].classList.remove('active-slide');
         this.slides[numNextSlide].classList.add('active-slide');
 
