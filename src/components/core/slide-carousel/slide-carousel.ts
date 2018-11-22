@@ -7,14 +7,40 @@ class SlideCarousel extends HTMLElement {
         super();
     }
 
+    get activeClass() {
+        return this.getAttribute('active-slide-class') || 'active-slide';
+    }
+
     get activeIndex(): number {
         return this.slides.findIndex((el) => el.classList.contains('active-slide'));
     }
 
+    private _cleanAnimationClasses() {
+        this.slides.forEach((elem) => {
+            if(elem.classList.contains('left'))
+            {
+                elem.classList.remove('left');
+            }
+            if(elem.classList.contains('right'))
+            {
+                elem.classList.remove('right');
+            }
+        })
+    }
+
     set activeIndex(numNextSlide: number) {
+        const copyNumNextSlide = numNextSlide;
         numNextSlide = (numNextSlide + this.slides.length) % this.slides.length;
-        this.slides[this.activeIndex].classList.remove('active-slide');
-        this.slides[numNextSlide].classList.add('active-slide');
+
+        this._cleanAnimationClasses();
+        if (copyNumNextSlide > this.activeIndex) {
+            this.slides[numNextSlide].classList.add('left');
+        } else {
+            this.slides[numNextSlide].classList.add('right');
+        }
+
+        this.slides[this.activeIndex].classList.remove(this.activeClass);
+        this.slides[numNextSlide].classList.add(this.activeClass);
 
         this.triggerSlideChange();
     }

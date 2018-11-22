@@ -1,9 +1,9 @@
 const config = {
-    rootMargin: '0px 0px 50px 0px',
+    rootMargin: '0px 0px 0px 0px',
     threshold: 0
 };
 
-let observer = new IntersectionObserver(function(entries, self) {
+let observer = new IntersectionObserver(function(entries, observer) {
     // iterate over each entry
     entries.forEach(entry => {
         // process just the images that are intersecting.
@@ -11,16 +11,13 @@ let observer = new IntersectionObserver(function(entries, self) {
         if(entry.isIntersecting) {
             // custom function that copies the path to the img
             // from data-src to src
-            preloadImage(entry.target);
+            const target = entry.target as HTMLImageElement;
+            target.src = target.dataset.src;
             // the image is now in place, stop watching
-            self.unobserve(entry.target);
+            observer.unobserve(entry.target);
         }
     });
 }, config);
-
-function preloadImage(target: any) {
-    target.src = target.dataset.src;
-}
 
 const imgs = document.querySelectorAll('[data-src]');
 
