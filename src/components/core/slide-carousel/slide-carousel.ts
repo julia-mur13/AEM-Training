@@ -17,14 +17,8 @@ class SlideCarousel extends HTMLElement {
 
     private _cleanAnimationClasses() {
         this.slides.forEach((elem) => {
-            if(elem.classList.contains('left'))
-            {
-                elem.classList.remove('left');
-            }
-            if(elem.classList.contains('right'))
-            {
-                elem.classList.remove('right');
-            }
+            elem.classList.remove('left');
+            elem.classList.remove('right');
         })
     }
 
