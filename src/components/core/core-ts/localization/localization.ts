@@ -1,31 +1,26 @@
-import DropdownMenu from "../../dropdown-menu/dropdown-menu";
+import * as paths from '../../../../../paths/config-paths';
+import LabelI18n from "./label-i18n";
 
 class Localization {
 
-    constructor() {
-        const lang: string = this.lang;
-        this.menu.addEventListener('dd-menuchanged', (event: MouseEvent) => this._onChange(event, lang));
+    currentLocale: string;
+
+    get items() {
+        const els = document.querySelectorAll('label-i18n') as NodeListOf<LabelI18n>;
+        return els ? Array.from(els) : [];
     }
 
-    get menu(): DropdownMenu {
-        return document.getElementById('dropdown-menu') as DropdownMenu;
+    private changeLang(trans?: any) {
+        this.items.forEach((elem: LabelI18n) => {
+            trans && trans[elem.value] ? elem.value = trans[elem.value] : elem.value = elem.enValue;
+        })
     }
 
-    get lang(): string {
-        return this.menu.input.value;
-    }
-
-    private _onChange(event: MouseEvent, value: string) {
-        console.log(5);
-        // const target = event.target as HTMLElement;
-        // const newLang = target.textContent;
-        // if (value !== newLang) {
-        //    this.items.forEach((elem: HTMLElement) => {
-        //        const text: string = elem.dataset.langItem;
-        //        const lang = new Lang(newLang, text);
-        //        elem.innerText = lang.translation;
-        //    });
-        // }
+    private _onChange(event: MouseEvent) {
+        // @ts-ignore
+        const target = event.detail as HTMLElement;
+        const nextEl = target.querySelector('label-i18n') as LabelI18n;
+        this.changeLang();
     }
 }
 

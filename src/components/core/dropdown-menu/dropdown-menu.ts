@@ -40,22 +40,12 @@ class DropdownMenu extends PopupMenu {
 
     private _onChange(event: MouseEvent) {
         const target = event.target as HTMLElement;
-        if (this.input.value !== target.textContent) {
-            this.input.triggerInput(target.textContent);
-            this.triggerItemChange();
-        }
         this.activeIndex = +target.dataset.menuItem - 1;
+        this.input.triggerInput(target.textContent);
         this.active = !this.active;
         if (!this.active) {
             (this.activeItm) && this.activeItm.focus();
         }
-    }
-
-    private triggerItemChange() {
-        const event = new CustomEvent('dd-menuchanged', {
-            bubbles: true
-        });
-        this.dispatchEvent(event);
     }
 }
 

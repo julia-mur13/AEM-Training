@@ -21,8 +21,6 @@ const COMPONENTS_LIST = [
     Localization
 ];
 
-
-
 COMPONENTS_LIST.forEach((Component) => {
     const component = new Component();
 });

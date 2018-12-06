@@ -3,16 +3,19 @@ class LabelI18n extends HTMLElement {
         return 'label-i18n';
     }
 
+    public enValue: string;
+
     constructor() {
         super();
+        this.enValue = this.textContent;
     }
 
-    get value() {
+    get value(): string{
         return this.textContent;
     }
 
-    set value(value: string) {
-        this.textContent = '';
+    set value(value: string){
+        this.textContent = value;
     }
 }
 
