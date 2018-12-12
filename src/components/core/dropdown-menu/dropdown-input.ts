@@ -39,10 +39,11 @@ class DropdownInput extends PopupTrigger {
     private triggerValueChange(value: string) {
         const event = new CustomEvent('dd-inputchanged', {
             bubbles: true,
-            detail: { value: value}
+            detail: { value: value, elem: this}
         });
         this.dispatchEvent(event);
     }
+
 }
 
 customElements.define(DropdownInput.is, DropdownInput);

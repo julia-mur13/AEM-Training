@@ -1,26 +1,51 @@
-import * as paths from '../../../../../paths/config-paths';
+import DropdownInput from "../../dropdown-menu/dropdown-input";
+import API from "../API";
 import LabelI18n from "./label-i18n";
+
+
+let instance: Localization;
 
 class Localization {
 
     currentLocale: string;
+    translations: { [key: string]: string };
+    elms: LabelI18n[];
 
-    get items() {
-        const els = document.querySelectorAll('label-i18n') as NodeListOf<LabelI18n>;
-        return els ? Array.from(els) : [];
+    constructor() {
+        if (instance) {
+            return instance;
+        }
+        instance = this;
+
+        this.elms = [];
+        instance.input.addEventListener('dd-inputchanged', (event: CustomEvent) => {
+            this.currentLocale = event.detail.value;
+            API.sendRequest(this.currentLocale).then((trans) => {
+                this.translations = trans;
+                this.elms.forEach((el) => {
+                    el.value = this.getLocalizedValue(el.enValue);
+                });
+            }).catch((error) => {
+                console.log(error);
+            });
+        });
     }
 
-    private changeLang(trans?: any) {
-        this.items.forEach((elem: LabelI18n) => {
-            trans && trans[elem.value] ? elem.value = trans[elem.value] : elem.value = elem.enValue;
-        })
+    get input(): DropdownInput {
+        return document.getElementById('dropdown-input') as DropdownInput;
     }
 
-    private _onChange(event: MouseEvent) {
-        // @ts-ignore
-        const target = event.detail as HTMLElement;
-        const nextEl = target.querySelector('label-i18n') as LabelI18n;
-        this.changeLang();
+    getLocalizedValue(key: string): string {
+        return this.translations[key];
+    }
+
+    subscribe(obj: any) {
+        this.elms.push(obj)
+    }
+
+    unsubscribe(obj: any) {
+        const index = this.elms.indexOf(obj);
+        this.elms.splice(index, 1);
     }
 }
 

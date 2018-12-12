@@ -1,8 +1,8 @@
 import * as paths from "../../../../paths/config-paths";
 
 const API = {
-    sendRequest(path: string) {
-        return fetch(`${paths.URL_SERVER}assets/i18n/${path}.json`, {
+    async sendRequest(path: string) {
+        return await fetch(`${paths.URL_SERVER}assets/i18n/${path}.json`, {
             method: 'GET',
             mode: 'cors',
             headers: {
@@ -14,11 +14,7 @@ const API = {
             }
             return response.json();
         })
-            .then((trans) => {
-                this.changeLang(trans);
-            })
-            .catch((error) => {
-                console.log('error', error)
-            });
     }
 };
+
+export default API;
