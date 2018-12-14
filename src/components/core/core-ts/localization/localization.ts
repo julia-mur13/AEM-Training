@@ -1,15 +1,17 @@
-import DropdownInput from "../../dropdown-menu/dropdown-input";
 import API from "../API";
-import LabelI18n from "./label-i18n";
 
 
-let instance: Localization;
+let instance: LocalizationManager;
 
-class Localization {
+export interface LocationObserver {
+    locationChange: (manager: LocalizationManager) => void
+}
 
-    currentLocale: string;
-    translations: { [key: string]: string };
-    elms: LabelI18n[];
+class LocalizationManager {
+
+    private _currentLocale: string;
+    private _translations: { [key: string]: string };
+    private _subscribers: LocationObserver[];
 
     constructor() {
         if (instance) {
@@ -17,36 +19,53 @@ class Localization {
         }
         instance = this;
 
-        this.elms = [];
-        instance.input.addEventListener('dd-inputchanged', (event: CustomEvent) => {
-            this.currentLocale = event.detail.value;
-            API.sendRequest(this.currentLocale).then((trans) => {
-                this.translations = trans;
-                this.elms.forEach((el) => {
-                    el.value = this.getLocalizedValue(el.enValue);
-                });
-            }).catch((error) => {
-                console.log(error);
-            });
+        instance._subscribers = [];
+    }
+
+    private onChange() {
+        API.sendRequest(this._currentLocale).then((trans) => {
+            this._translations = trans;
+            this.emitChanges();
         });
     }
 
-    get input(): DropdownInput {
-        return document.getElementById('dropdown-input') as DropdownInput;
+    private emitChanges() {
+        this._subscribers.forEach((subs) => subs.locationChange(this));
     }
 
     getLocalizedValue(key: string): string {
-        return this.translations[key];
+        return this._translations[key] ? this._translations[key] : key;
     }
 
-    subscribe(obj: any) {
-        this.elms.push(obj)
+    static subscribe(obj: LocationObserver) {
+        const inst = new LocalizationManager();
+        inst.subscribe(obj);
     }
 
-    unsubscribe(obj: any) {
-        const index = this.elms.indexOf(obj);
-        this.elms.splice(index, 1);
+    static unsubscribe(obj: LocationObserver) {
+        const inst = new LocalizationManager();
+        inst.unsubscribe(obj);
+    }
+
+    private subscribe(obj: LocationObserver) {
+        this._subscribers.push(obj)
+    }
+
+    private unsubscribe(obj: LocationObserver) {
+        const index = this._subscribers.indexOf(obj);
+        this._subscribers.splice(index, 1);
+    }
+
+    static instance(): LocalizationManager {
+        return new LocalizationManager();
+    }
+
+    public setLocale(value: string) {
+        this._currentLocale = value;
+        this.onChange();
     }
 }
 
-export default Localization;
+// @ts-ignore
+window.LocalizationManager = LocalizationManager;
+export default LocalizationManager;

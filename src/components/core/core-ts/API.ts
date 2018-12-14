@@ -1,5 +1,13 @@
 import * as paths from "../../../../paths/config-paths";
 
+// function responseParse(response) {
+//     try {
+//         return response.ok ? response.json() : response.json().then((text) => Promise.reject(text));
+//     } catch (e) {
+//         return Promise.reject(e);
+//     }
+// }
+
 const API = {
     async sendRequest(path: string) {
         return await fetch(`${paths.URL_SERVER}assets/i18n/${path}.json`, {
@@ -9,11 +17,14 @@ const API = {
                 'Content-Type': 'application/json; charset=utf-8',
             }
         }).then((response) => {
-            if (response.status !== 200) {
-                return Promise.reject();
+            try {
+                return response.json();
+            } catch (e) {
+                return Promise.reject(e);
             }
-            return response.json();
-        })
+        }).catch((error) => {
+            console.log(error);
+        });
     }
 };
 

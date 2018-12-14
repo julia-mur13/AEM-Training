@@ -43,7 +43,7 @@ class DropdownMenu extends PopupMenu {
         const target = event.target as HTMLElement;
         const i18nEl = target.querySelector('label-i18n') as LabelI18n;
         this.activeIndex = +target.dataset.menuItem - 1;
-        this.input.triggerInput(i18nEl.enValue);
+        this.input.triggerInput(i18nEl.key);
         this.active = !this.active;
         if (!this.active) {
             (this.activeItm) && this.activeItm.focus();

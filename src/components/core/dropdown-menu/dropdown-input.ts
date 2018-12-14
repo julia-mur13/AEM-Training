@@ -43,7 +43,6 @@ class DropdownInput extends PopupTrigger {
         });
         this.dispatchEvent(event);
     }
-
 }
 
 customElements.define(DropdownInput.is, DropdownInput);
