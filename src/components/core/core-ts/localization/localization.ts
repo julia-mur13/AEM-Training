@@ -1,6 +1,5 @@
 import API from "../API";
 
-
 let instance: LocalizationManager;
 
 export interface LocationObserver {

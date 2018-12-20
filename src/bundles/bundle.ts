@@ -28,7 +28,7 @@ COMPONENTS_LIST.forEach((component: Function | Array<any>) => {
         Component = component;
     }
 
-    console.log(`[Component Initialization]: component ${Component.name} on "${selector}"`);
+    // console.log(`[Component Initialization]: component ${Component.name} on "${selector}"`);
     new Component(selector && document.querySelector(selector));
 });
 
