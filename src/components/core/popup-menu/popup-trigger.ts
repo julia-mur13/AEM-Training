@@ -50,6 +50,14 @@ class PopupTrigger extends HTMLElement {
 
     private _onActivate() {
         this.popup.active = !this.popup.active;
+        this.triggerChange();
+    }
+
+    private triggerChange() {
+        const event = new CustomEvent('pm-changed', {
+            bubbles: true,
+        });
+        this.dispatchEvent(event);
     }
 }
 

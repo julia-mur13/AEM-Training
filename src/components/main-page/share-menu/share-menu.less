@@ -5,6 +5,20 @@ popup-trigger .share-btn {
   background: #fff;
 }
 
-popup-trigger.share-trigger{
+popup-trigger.share-trigger {
+  visibility: hidden;
   position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+popup-menu.share-popup {
+  position: absolute;
+  right: 50px;
+  bottom: 7px;
+}
+
+.post:hover popup-trigger.share-trigger {
+  visibility: visible;
+
 }
