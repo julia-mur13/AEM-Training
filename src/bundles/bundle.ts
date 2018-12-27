@@ -6,17 +6,17 @@ import '../components/core/dropdown-menu/dropdown-input';
 import '../components/core/dropdown-menu/dropdown-menu';
 import '../components/core/core-ts/lazyload'
 import '../components/core/core-ts/localization/label-i18n'
-import '../components/main-page/share-menu/share-menu';
-
 
 import VideoService from '../components/core/video-overlay/video-service';
 import VideoTrigger from '../components/core/video-overlay/video-trigger';
 import VideoOverlay from "../components/main-page/video-overlay/video-overlay";
 import LangMenuController from "../components/main-page/lang-menu/lang-menu";
+import ShareMenu from "../components/main-page/share-menu/share-menu";
 
 const COMPONENTS_LIST = [
     VideoService,
     VideoOverlay,
+    ShareMenu,
     [LangMenuController, '.popup-menu-container']
 ];
 

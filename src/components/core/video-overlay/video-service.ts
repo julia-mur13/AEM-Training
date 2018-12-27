@@ -15,6 +15,7 @@ class VideoService {
         instance._popup = instance._createElement() as PopupMenu;
 
         document.querySelector('body').appendChild(instance._popup);
+        this._popup.addEventListener('click', () => this.hide());
     }
 
     get iframe(): HTMLIFrameElement {

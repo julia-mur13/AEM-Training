@@ -1,8 +1,36 @@
-popup-trigger .share-btn {
-  width: 25px;
-  height: 25px;
-  padding: 0;
-  background: #fff;
+popup-trigger {
+  .share-btn {
+    width: auto;
+    height: 35px;
+    padding: 0;
+    background: #fff;
+    display: flex;
+    align-items: center;
+  }
+
+  .svg-share {
+    height: 25px;
+    width: 25px;
+    fill: #ebebeb;
+    transition: fill .2s ease-in-out;
+  }
+
+  .text-share {
+    margin-right: 7px;
+    color: #ebebeb;
+    font-family: Playfair Display Regular, serif;
+    font-size: 13.5px;
+    letter-spacing: .07em;
+    transition: color .2s ease-in-out;
+  }
+
+  .hide-text-share {
+    visibility: hidden;
+  }
+
+  .open-share-trigger-svg {
+    fill: rgb(102, 102, 102);
+  }
 }
 
 popup-trigger.share-trigger {
@@ -12,7 +40,7 @@ popup-trigger.share-trigger {
   right: 10px;
 }
 
-popup-menu.share-popup {
+popup-menu.share-popup-menu {
   position: absolute;
   right: 50px;
   bottom: 7px;
@@ -21,4 +49,12 @@ popup-menu.share-popup {
 .post:hover popup-trigger.share-trigger {
   visibility: visible;
 
+}
+
+popup-trigger.open-share-trigger {
+  visibility: visible;
+}
+
+popup-menu .share-itms a {
+  outline: none;
 }
