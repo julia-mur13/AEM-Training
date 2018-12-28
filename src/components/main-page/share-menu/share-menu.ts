@@ -1,20 +1,29 @@
 import PopupTrigger from "../../core/popup-menu/popup-trigger";
 
-class ShareMenu {
+class ShareMenu extends HTMLElement {
+
+    static get is() { return 'share-menu'; }
+
     constructor() {
-        this.items.forEach((el: HTMLElement) => el.addEventListener('pm-changed', () => {
-            const text = el.querySelector('label-i18n') as HTMLElement;
+        super();
+    }
+
+    connectedCallback() {
+        this.addEventListener('pm-changed', () => {
+            const text = this.querySelector('.text-share') as HTMLElement;
             if (text) {
-                text.classList.toggle('hide-text-share');
+                text.classList.contains('hide-text-share') ? text.classList.add('hide-text-share') : text.classList.remove('hide-text-share');
             }
-            el.classList.toggle('open-share-trigger');
-        }))
+            this.classList.contains('open-share-trigger') ? text.classList.add('open-share-trigger') : text.classList.remove('open-share-trigger');
+        });
     }
 
     get items() {
-        const els = document.querySelectorAll('.share-trigger') as NodeListOf<PopupTrigger>;
+        const els = this.querySelectorAll('.share-trigger') as NodeListOf<PopupTrigger>;
         return els ? Array.from(els) : [];
     }
 }
+
+customElements.define(ShareMenu.is, ShareMenu);
 
 export default ShareMenu;

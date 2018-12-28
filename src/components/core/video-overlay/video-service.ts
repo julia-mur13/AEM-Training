@@ -13,6 +13,7 @@ class VideoService {
         instance = this;
 
         instance._popup = instance._createElement() as PopupMenu;
+        instance.bindEvents();
 
         document.querySelector('body').appendChild(instance._popup);
         this._popup.addEventListener('click', () => this.hide());
@@ -52,6 +53,10 @@ class VideoService {
             this.iframe.src = "";
             this._popup.active = false;
         }
+    }
+
+    private bindEvents() {
+        // this.btnHide.addEventListener('click', () => VideoService.hide());
     }
 
     private _createElement(): HTMLElement {
