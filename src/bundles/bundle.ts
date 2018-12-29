@@ -8,12 +8,10 @@ import '../components/core/core-ts/lazyload'
 import '../components/core/core-ts/localization/label-i18n'
 
 import VideoTrigger from '../components/core/video-overlay/video-trigger';
-import VideoOverlay from "../components/main-page/video-overlay/video-overlay";
 import LangMenuController from "../components/main-page/lang-menu/lang-menu";
 import "../components/main-page/share-menu/share-menu";
 
 const COMPONENTS_LIST = [
-    VideoOverlay,
     [LangMenuController, '.popup-menu-container']
 ];
 

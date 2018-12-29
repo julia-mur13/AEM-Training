@@ -38,6 +38,7 @@ class PopupTrigger extends HTMLElement {
         } else {
             this.addEventListener(this.triggerOn, this._onActivate, false);
         }
+        this.popup.addEventListener('pm-changed', this._onPopupStateChange);
     }
 
     private _detachEvent() {
@@ -46,19 +47,15 @@ class PopupTrigger extends HTMLElement {
         } else {
             this.removeEventListener(this.triggerOn, this._onActivate);
         }
+        this.popup.removeEventListener('pm-changed', this._onPopupStateChange);
     }
 
-    private _onActivate() {
+    private _onActivate = () => {
         this.popup.active = !this.popup.active;
-        this.triggerChange();
-    }
-
-    private triggerChange() {
-        const event = new CustomEvent('pm-changed', {
-            bubbles: true,
-        });
-        this.dispatchEvent(event);
-    }
+    };
+    private _onPopupStateChange = () => {
+        this.toggleAttribute('active', this.popup.active)
+    };
 }
 
 customElements.define('popup-trigger', PopupTrigger);

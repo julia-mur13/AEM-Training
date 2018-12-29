@@ -1,4 +1,6 @@
-.share-trigger {
+share-menu {
+  display: inline-block;
+
   .share-btn {
     width: auto;
     height: 35px;
@@ -24,45 +26,31 @@
     transition: color .2s ease-in-out;
   }
 
-  .hide-text-share {
-    visibility: hidden;
+  .share-popup-menu {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    width: 200px;
   }
 
-  .open-share-trigger-svg {
-    fill: rgb(102, 102, 102);
+  .share-itms .at-share-btn {
+    outline: none;
+  }
+
+  &:hover {
+    .svg-share {
+      fill: #b7b7b7;
+    }
+    .text-share {
+      color: #b7b7b7;
+    }
+  }
+  &[active] {
+    .svg-share {
+      fill: #b7b7b7;
+    }
+    .text-share {
+      display: none;
+    }
   }
 }
-
-.share-trigger {
-  visibility: hidden;
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-}
-
-.share-popup-menu {
-  position: absolute;
-  right: 50px;
-  bottom: 7px;
-}
-
-.post:hover .share-trigger {
-  visibility: visible;
-}
-
-.open-share-trigger {
-  visibility: visible;
-}
-
-.share-itms .at-share-btn {
-  outline: none;
-}
-
-.share-container:hover .svg-share {
-  fill: #b7b7b7;
-}
-
-.share-container:hover .text-share {
-  color: #b7b7b7;
-}
-

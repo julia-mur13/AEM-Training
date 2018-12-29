@@ -56,7 +56,11 @@ class VideoService {
     }
 
     private bindEvents() {
-        // this.btnHide.addEventListener('click', () => VideoService.hide());
+        this._btnHide.addEventListener('click', () => VideoService.hide());
+    }
+
+    get _btnHide(): HTMLElement {
+        return this._popup.querySelector('.hide-video-btn') as HTMLElement;
     }
 
     private _createElement(): HTMLElement {
