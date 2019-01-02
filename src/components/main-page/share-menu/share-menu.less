@@ -1,5 +1,5 @@
 .share-container {
-  display: inline-block;
+  display: flex;
   position: absolute;
   bottom: 0;
   right: 0;
@@ -17,10 +17,11 @@
     width: 25px;
     fill: #ebebeb;
     transition: fill .2s ease-in-out;
-
   }
 
   .text-share {
+    display: flex;
+    align-items: center;
     margin-right: 7px;
     color: #ebebeb;
     font-family: Playfair Display Regular, serif;
@@ -39,17 +40,7 @@
   .share-itms .at-share-btn {
     outline: none;
   }
-
-  &[active] {
-    .svg-share {
-      fill: #b7b7b7;
-    }
-    .text-share {
-      display: none;
-    }
+  &:hover .text-share {
+    display: none;
   }
-}
-
-.share-btn:hover .text-share {
-  display: none;
 }

@@ -100,32 +100,27 @@
 }
 
 .post {
-  share-menu {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-  }
-  .share-menu {
-    visibility: hidden;
-  }
+  //.share-container {
+  //  visibility: hidden;
+  //}
 }
 
 :not(.full-post-container) .post {
-  share-menu {
+  .share-container {
     opacity: 0;
     transition: opacity .5s ease-in-out;
   }
   &:hover {
-    share-menu {
+    .share-container {
       opacity: 1;
     }
   }
 }
 
 .post:hover {
-  .share-menu {
-    visibility: visible;
-  }
+  //.share-container {
+  //  visibility: visible;
+  //}
   .text-share {
     display: flex;
   }
