@@ -1,15 +1,5 @@
 .post {
-  position: relative;
-  width: 27%;
-  min-width: 250px;
   background: #ffffff;
-  margin: 30px 19/6% 10px 19/6%;
-  outline: 2px solid transparent;
-  transition: outline-offset .5s ease-out, outline .5s ease-out;
-  &:hover {
-    outline: 2px solid #b0b2b1;
-    outline-offset: 5px;
-  }
 }
 
 .post-link {
@@ -75,8 +65,23 @@
   }
 }
 
+.manual-Card {
+  position: relative;
+  width: 27%;
+  min-width: 250px;
+  height: 380px;
+  background: #fff;
+  margin: 30px 3.16666667% 10px;
+  outline: 2px solid transparent;
+  transition: outline-offset .5s ease-out, outline .5s ease-out;
+  &:hover {
+    outline: 2px solid #b0b2b1;
+    outline-offset: 5px;
+  }
+}
+
 @media screen and (max-width: 655px) {
-  .post {
+  .manual-Card {
     height: 500px;
     width: 95%;
   }
@@ -93,8 +98,10 @@
 
 }
 
+
+
 @media screen and (max-width: 1150px) and (min-width: 655px) {
-  .post {
+  .manual-Card {
     width: 43.6%;
   }
 }
@@ -105,22 +112,20 @@
   //}
 }
 
-:not(.full-post-container) .post {
-  .share-container {
-    opacity: 0;
-    transition: opacity .5s ease-in-out;
-  }
-  &:hover {
-    .share-container {
-      opacity: 1;
-    }
+.full-post-container {
+  .share-wrapper {
+    opacity: 1;
+    right: 11%;
   }
 }
 
-.post:hover {
-  //.share-container {
-  //  visibility: visible;
-  //}
+.manual-Card:hover {
+  &:hover {
+    .share-wrapper {
+      opacity: 1;
+      transition: opacity .5s ease-in-out;
+    }
+  }
   .text-share {
     display: flex;
   }
