@@ -8,7 +8,6 @@ class ShareMenu extends PopupTrigger {
         super();
         this.classList.add(ShareMenu.is)
     }
-
 }
 
 customElements.define(ShareMenu.is, ShareMenu);
