@@ -35,7 +35,7 @@ class PopupTrigger extends HTMLElement {
     }
 
     get mouseoverTime(): number {
-        return +this.dataset.mouseoverTime || 500;
+        return +this.dataset.mouseoverTime || 1000;
     }
 
     private _attachEvent() {
