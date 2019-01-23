@@ -113,11 +113,19 @@ class Grid extends HTMLElement {
             return response.ok ? response.text() : response.text().then((text) => Promise.reject(text));
         }).then((response) => {
             this.onResponse(response);
+            this.loadElsEvent();
             finallyCb();
         }).catch(() => {
             this.onError();
             finallyCb();
         });
+    }
+
+    loadElsEvent() {
+        const event = new CustomEvent('gr-load', {
+            bubbles: true
+        });
+        this.dispatchEvent(event);
     }
 }
 
