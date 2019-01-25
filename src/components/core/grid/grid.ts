@@ -122,7 +122,7 @@ class Grid extends HTMLElement {
     }
 
     loadElsEvent() {
-        const event = new CustomEvent('gr-load', {
+        const event = new CustomEvent('gr-loadels', {
             bubbles: true
         });
         this.dispatchEvent(event);

@@ -11,7 +11,7 @@ import '../components/core/video-overlay/video-link';
 
 import VideoTrigger from '../components/core/video-overlay/video-trigger';
 import LangMenuController from "../components/main-page/lang-menu/lang-menu";
-import '../components/main-page/share-menu/share-menu';
+import '../components/main-page/share-bar/share-bar';
 
 const COMPONENTS_LIST = [
     [LangMenuController, '.popup-menu-container']
