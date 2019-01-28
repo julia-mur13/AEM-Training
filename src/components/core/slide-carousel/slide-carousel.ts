@@ -19,6 +19,7 @@ class SlideCarousel extends HTMLElement {
 
     private bindEvents() {
         this.addEventListener('click', (event) => this._onClick(event), false);
+        // this.addEventListener('sc-slideanimation', () => this._onAnimate(), false);
     }
 
     get activeClass() {
@@ -29,29 +30,26 @@ class SlideCarousel extends HTMLElement {
         return this.slides.findIndex((el) => el.classList.contains(this.activeClass));
     }
 
+    get animDirection(): string {
+        return this.getAttribute('direction');
+    }
+
     private _cleanAnimationClasses() {
-        this.slides.forEach((elem) => {
-            elem.classList.remove('left');
-            elem.classList.remove('right');
-        })
+        if (this.animDirection) {
+            this.slides.forEach((elem) => {
+                elem.classList.remove(this.animDirection);
+                elem.classList.remove(`prev`);
+            })
+        }
     }
 
     set activeIndex(numNextSlide: number) {
-        const copyNumNextSlide = numNextSlide;
-        numNextSlide = (numNextSlide + this.slides.length) % this.slides.length;
-
-        this._cleanAnimationClasses();
-        if (copyNumNextSlide > this.activeIndex) {
-            this.slides[numNextSlide].classList.add('left');
-        } else {
-            this.slides[numNextSlide].classList.add('right');
-        }
-
         if (this.activeIndex !== -1) {
+            this._onAnimate(numNextSlide);
             this.slides[this.activeIndex].classList.remove(this.activeClass);
         }
+        numNextSlide = (numNextSlide + this.slides.length) % this.slides.length;
         this.slides[numNextSlide].classList.add(this.activeClass);
-
         this.triggerSlideChange();
     }
 
@@ -63,14 +61,24 @@ class SlideCarousel extends HTMLElement {
     private _onClick(event: MouseEvent) {
         const target = event.target as HTMLElement;
         if (target && target.dataset.slideTarget) {
+            this._cleanAnimationClasses();
             this.setActive(target.dataset.slideTarget);
         }
     }
 
+    private _onAnimate(numNextSlide: number) {
+        numNextSlide > this.activeIndex ? this.setAttribute('direction', 'left') : this.setAttribute('direction', 'right');
+        this.slides[this.activeIndex].classList.add('prev');
+        numNextSlide = (numNextSlide + this.slides.length) % this.slides.length;
+        this.slides[numNextSlide].classList.add(this.animDirection);
+    }
+
     private setActive(target: number | string) {
         if ('prev' === target) {
+            this.setAttribute('direction', 'right');
             this.activeIndex--;
         } else if ('next' === target) {
+            this.setAttribute('direction', 'left');
             this.activeIndex++;
         } else {
             this.activeIndex = +target;

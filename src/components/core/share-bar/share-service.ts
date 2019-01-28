@@ -35,7 +35,7 @@ class ShareService {
     public static updateToolboxes() {
         this.requestAddthis().then(() => {
             // @ts-ignore
-            window.addthis.layers.refresh();
+            window.addthis.layers.refresh && window.addthis.layers.refresh();
             console.log('[AddThis]: layers update');
         }, (e) => console.log('[AddThis]: update rejected:', e));
     }
