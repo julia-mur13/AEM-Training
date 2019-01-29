@@ -4,8 +4,7 @@
   width: 100%;
   overflow: hidden;
   [data-slide-item] {
-    display: flex;
-    visibility: hidden;
+    display: none;
     flex-direction: column;
     position: absolute;
     height: 100%;
@@ -64,7 +63,7 @@
   }
 
   .active-slide {
-    visibility: visible;
+    display: flex;
     opacity: 1;
     z-index: 2;
   }
@@ -90,23 +89,23 @@
   }
 
   .left {
-    animation: move-to-left 1s ease-in-out;
-    visibility: visible;
-  }
+     animation: move-to-left 1s ease-in-out;
+     display: flex;
+   }
 
   &[direction="left"] .prev {
     animation: move-to-current-left 1s ease-in-out;
-    visibility: visible;
+    display: flex;
   }
 
   .right {
     animation: move-to-right 1s ease-in-out;
-    visibility: visible;
+    display: flex;
   }
 
   &[direction="right"] .prev {
     animation: move-to-current-right 1s ease-in-out;
-    visibility: visible;
+    display: flex;
   }
 
   @keyframes move-to-left {
