@@ -27,6 +27,7 @@ function preloadImage(target: HTMLImageElement) {
     }
 }
 
+
 function addClassToFullPost(target: HTMLImageElement) {
     const wrapper = target.closest('.full-post-wrapper');
     if (wrapper && wrapper.querySelector('.full-post-container') && !wrapper.querySelector('.full-post-container').classList.contains('full-post-margin')) {

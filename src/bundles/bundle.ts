@@ -17,7 +17,7 @@ const COMPONENTS_LIST = [
     [LangMenuController, '.popup-menu-container']
 ];
 
-COMPONENTS_LIST.forEach((component: Function | Array<any>) => {
+COMPONENTS_LIST.forEach((component: (() => void) | any[]) => {
     let Component;
     let selector = '';
 
@@ -27,8 +27,9 @@ COMPONENTS_LIST.forEach((component: Function | Array<any>) => {
         Component = component;
     }
 
-    // console.log(`[Component Initialization]: component ${Component.name} on "${selector}"`);
+    console.log(`[Component Initialization]: component ${Component.name} on "${selector}"`);
     new Component(selector && document.querySelector(selector));
+
 });
 
 const links = document.querySelectorAll('.post a[href*="youtube"]');

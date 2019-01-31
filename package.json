@@ -13,6 +13,7 @@
     "@webcomponents/custom-elements": "^1.2.1"
   },
   "devDependencies": {
+    "aemsync": "^3.0.2",
     "autoprefixer": "^9.4.4",
     "browser-sync": "^2.26.3",
     "cssnano": "^4.1.8",

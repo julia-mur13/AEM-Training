@@ -1,0 +1,62 @@
+.toggle-switch {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .tgl {
+    display: none;
+
+    &,
+    &:after,
+    &:before,
+    & *,
+    & *:after,
+    & *:before,
+    & + .tgl-btn {
+      box-sizing: border-box;
+    }
+
+    &:checked + .tgl-btn:after {
+      left: 60%;
+    }
+  }
+
+  .tgl-btn {
+    display: block;
+    position: relative;
+    width: 2.8em;
+    height: 1.4em;
+    padding: 2px;
+    border-radius: 2em;
+    border: 2px solid rgba(156, 174, 192, 0.27);
+    outline: 0;
+    cursor: pointer;
+    transition: all .4s ease;
+    &:after,
+    &:before {
+      position: relative;
+      display: block;
+      content: "";
+      width: 40%;
+      height: 100%;
+    }
+
+    &:after {
+      left: 0;
+      border-radius: 50%;
+      background: rgba(156, 174, 192, 0.27);
+      transition: all .2s ease;
+    }
+
+    &:before {
+      display: none;
+    }
+  }
+
+  .light-icon, .dark-icon {
+    position: relative;
+    width: 1.1em;
+    margin: 0 7px;
+    fill: #9caec0;
+    cursor: pointer;
+  }
+}
