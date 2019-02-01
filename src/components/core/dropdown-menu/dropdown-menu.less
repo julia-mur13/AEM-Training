@@ -1,16 +1,19 @@
 .dropdown-menu [data-menu-item] {
   display: block;
   padding: 20px;
-  color: #000;
-  border-bottom: 1px solid rgba(0, 0, 0, .05);
+  color: var(--dm-font-color);
+  border-bottom: 1px solid var(--dm-border-color);
   text-decoration: none;
   outline: none;
   &:hover {
-    background-color: rgba(0, 0, 0, .1);
+    background-color: var(--pm-active-item-color);
   }
 }
 
 .dropdown-input {
   position: relative;
   display: inline-block;
+  &[active] button {
+    color: var(--header-font-hover-color);
+  }
 }

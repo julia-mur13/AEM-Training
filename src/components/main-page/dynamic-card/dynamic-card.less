@@ -8,7 +8,7 @@
   .svg-arrow {
     width: 30px;
     height: 30px;
-    stroke: black;
+    stroke: var(--carousel-arrows-color);
     stroke-width: 1.7;
     stroke-linecap: round;
     stroke-linejoin: round;
@@ -17,18 +17,17 @@
 
 .dynamic-Card {
   min-width: 250px;
-  width: 27%;
+  width: 26.5%;
   height: 380px;
   display: flex;
+  position: relative;
   margin: 30px 3.16666667% 10px;
   word-wrap: break-word;
+  border: 1px solid var(--post-border-color);
   outline: 2px solid transparent;
   transition: outline-offset .5s ease-out, outline .5s ease-out;
-  position: relative;
-  background: #fff;
-
   &:hover {
-    outline: 2px solid #b0b2b1;
+    outline: 2px solid var(--carousel-outline-color);
     outline-offset: 5px;
   }
 }

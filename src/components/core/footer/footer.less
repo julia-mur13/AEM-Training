@@ -4,15 +4,16 @@ footer {
   height: 70px;
   width: 100%;
   flex-shrink: 0;
-  background: #000000;
-  color: #ffffff;
+  background: var(--footer-color);
+  color:  var(--footer-font-color);
 }
 
 .footer-container {
   display: flex;
   justify-content: space-between;
-  flex: 1 0 auto;
+
   height: 70px;
+  border-top: 1px solid var(--post-border-color);
   .footer-space {
     width: 250px;
   }
@@ -27,7 +28,7 @@ footer {
   }
   .footer-text-feedbook {
     text-align: center;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--footer-link-color);
     font-style: italic;
     font-family: "Lato", sans-serif;
     font-size: 15px;

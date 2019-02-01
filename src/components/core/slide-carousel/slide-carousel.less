@@ -1,6 +1,6 @@
 .slide-carousel {
   position: relative;
-  background: #ffffff;
+  background: var(---post-color);
   width: 100%;
   overflow: hidden;
   [data-slide-item] {
@@ -12,7 +12,7 @@
     z-index: 1;
     box-sizing: border-box;
     background-size: cover;
-    background: #ffffff;
+    background: var(--post-color);
     left: 0;
   }
 
@@ -22,7 +22,7 @@
     width: 11.5%;
     height: 100%;
     z-index: 3;
-    background: #ffffff;
+    background: var(--post-color);
     opacity: 0.1;
     transition: opacity 0.3s ease-in;
     color: #fff;
@@ -41,14 +41,14 @@
     display: inline-block;
     height: 15px;
     width: 15px;
-    background-color: #ebebeb;
+    background-color: var(--carousel-dots-color);
     transition: background-color 0.6s ease;
     margin: 0 2px;
     cursor: pointer;
     border-radius: 50%;
     z-index: 3;
     &:hover {
-      background-color: #b8b8b8;
+      background-color: var(--carousel-active-dot-color);
     }
   }
 
@@ -69,7 +69,7 @@
   }
 
   .active-dot {
-    background-color: #b8b8b8;
+    background-color: var(--carousel-active-dot-color);
   }
 
   .arrow-next-btn {
